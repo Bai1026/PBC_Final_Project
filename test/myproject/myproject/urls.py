@@ -25,6 +25,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', include('login.urls')),  # 添加這行代碼
+    # path('login/', include('login.urls')),
+    path('', include('login.urls')),
+    
 ]
 

@@ -4,7 +4,16 @@
     <title>Welcome</title>
 </head>
 <body>
-    <h1>Welcome {{ username }}!</h1>
-    <!-- 你的其他代碼 -->
+    <!-- <h1>Welcome {{ username }}!</h1> -->
+    
+    <!-- login/templates/login/welcome.html -->
+    <p>Welcome, {{ username }}!</p>
+    <img src="{{ profile.avatar.url }}" alt="Your avatar" width="100">
+    <p>Destination: {{ profile.destination }}</p>
+    <p>Age: {{ profile.age }}</p>
+    <p>Exchange School: {{ profile.exchange_school }}</p>
+    <p>Date: {{ profile.date }}</p>
+    <p>Gender: {{ profile.get_gender_display }}</p>
+
 </body>
 </html>

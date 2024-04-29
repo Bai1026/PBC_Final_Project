@@ -7,14 +7,15 @@
     - `python manage.py makemigrations`
     - `python manage.py migrate`
 
-- How to open the Django shell
-    - `python manage.py shell` to open the shell
-        - create a superuser
+## How to open the Django shell
+- `python manage.py shell` to open the shell
+
+- create a superuser
 ```bash
 python manage.py createsuperuser
 ```
 
-        - delete a superuser:
+- delete a superuser:
 ```bash
 from django.contrib.auth.models import User
 User.objects.filter(is_superuser=True).delete()
@@ -22,10 +23,10 @@ User.objects.filter(is_superuser=True).delete()
 User.objects.get(username='your_super_username').delete()
 ```
 
-        - check the user condition
-        ```bash
+- check the user condition
+```bash
 from django.contrib.auth.models import User
 users = User.objects.all()
 for user in users:
-    print(user.username)
-        ```
+    print(user)
+```

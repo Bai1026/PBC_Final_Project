@@ -1,13 +1,5 @@
-# from django.urls import path
-# from .views import login_view
-
-# urlpatterns = [
-#     path('', login_view, name='login'),
-# ]
-
-
 from django.urls import path
-from .views import user_login, welcome, register
+from .views import user_login, welcome, register, UserProfileUpdate
 
 urlpatterns = [
     # 你的其他URL模式
@@ -15,4 +7,5 @@ urlpatterns = [
     path('', user_login, name='login'),
     path('welcome/', welcome, name='welcome'),
     path('register/', register, name='register'),
+    path('profile/update/', UserProfileUpdate.as_view(), name='update_profile'),
 ]

@@ -3,7 +3,9 @@
 - `python manage.py runserver` or `python3 manage.py runserver` to start the server
 - type given 'url/login' to the log in page
 
-- If click the log in button and not working
+- If we change the models.py in login folder
+    - Which means that we change the architecture of the backend
+        - We could see the log of changing in the login/migrations folder
     - `python manage.py makemigrations`
     - `python manage.py migrate`
 

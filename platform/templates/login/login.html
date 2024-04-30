@@ -1,136 +1,135 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <style>
+        body {
+            position: relative; /* 这样伪元素可以相对于它定位 */
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: no-repeat center center;
+            background-size: cover;
+        }
 
-    body {
-        position: relative; /* 这样伪元素可以相对于它定位 */
-        font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background: no-repeat center center;
-        background-size: cover;
-    }
+        body::before {
+            content: ''; /* 伪元素需要content属性 */
+            position: absolute; /* 绝对定位 */
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url('../../myproject/static/images/Europe-1.jpg');
+            opacity: 0.45; /* 调整这里的值以设置透明度 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1; /* 确保伪元素在内容下方 */
+        }
 
-    body::before {
-        content: ''; /* 伪元素需要content属性 */
-        position: absolute; /* 绝对定位 */
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-image: url('../../myproject/static/images/Europe-1.jpg');
-        opacity: 0.45; /* 调整这里的值以设置透明度 */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: -1; /* 确保伪元素在内容下方 */
-    }
+        .header-2 {
+            color: #000000; /* 白色文字 */
+            padding: 10px;
+            margin-bottom: 0px;
+            border-radius: 4px; /* 轻微的圆角效果 */
+            text-align: center; /* 文字居中 */
+            font-size: 3em; /* 字号大小 */
+        }
+        .header-3 {
+            color: #000000; /* 白色文字 */
+            padding: 10px;
+            margin-bottom: 60px; /* 在欢迎文字和登录框之间增加一些空间 */
+            border-radius: 4px; /* 轻微的圆角效果 */
+            text-align: center; /* 文字居中 */
+            font-size: 1em; /* 字号大小 */
+        }
 
-    /* 确保内容在伪元素之上 */
-    .content {
-        position: relative;
-        z-index: 1;
-    }
+        /* 确保内容在伪元素之上 */
+        .content {
+            position: relative;
+            z-index: 1;
+            background-color: #dddddd87;
+            border-radius: 4px;
+            padding: 20px;
+        }
 
-    .login-box {
-        /* 添加其他样式 */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .login-inputs {
+            width: 100%;
+            margin-bottom: 10px; /* 为登录按钮和链接之间提供一些间距 */
+        }
 
-    .login-inputs {
-        width: 100%;
-        margin-bottom: 10px; /* 为登录按钮和链接之间提供一些间距 */
-    }
+        .login-actions {
+            width: 100%;
+            text-align: center; /* 居中按钮和链接 */
+        }
 
-    .login-actions {
-        width: 100%;
-        text-align: center; /* 居中按钮和链接 */
-    }
+        input[type="submit"] {
+            margin-bottom: 10px; /* 在按钮和链接之间提供间距 */
+        }
 
-    input[type="submit"] {
-        margin-bottom: 10px; /* 在按钮和链接之间提供间距 */
-    }
+        /* 输入框样式 */
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: block;
+            width: calc(100% - 22px); /* Adjust width for padding and border */
+        }
 
+        /* 按钮样式 */
+        input[type="submit"] {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
 
-    /* 输入框样式 */
-    input[type="text"],
-    input[type="password"] {
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        display: block;
-        width: calc(100% - 22px); /* Adjust width for padding and border */
-    }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
 
-    /* 按钮样式 */
-    input[type="submit"] {
-        padding: 10px 15px;
-        background-color: #5cb85c;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100%;
-    }
+        /* 链接样式 */
+        a {
+            color: #337ab7;
+            text-decoration: none;
+        }
 
-    input[type="submit"]:hover {
-        background-color: #4cae4c;
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    /* 链接样式 */
-    a {
-        color: #337ab7;
-        text-decoration: none;
-    }
+        /* 额外的文本信息 */
+        .extra-info {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-    a:hover {
-        text-decoration: underline;
-    }
+        .login {
+            display: flex;
+        }
 
-    /* 额外的文本信息 */
-    .extra-info {
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    .login {
-        display: flex;
-    }
-
-    .header-2 {
-        color: #000000; /* 白色文字 */
-        padding: 10px;
-        margin-bottom: 0px;
-        border-radius: 4px; /* 轻微的圆角效果 */
-        text-align: center; /* 文字居中 */
-        font-size: 3em; /* 字号大小 */
-    }
-    .header-3 {
-        color: #000000; /* 白色文字 */
-        padding: 10px;
-        margin-bottom: 60px; /* 在欢迎文字和登录框之间增加一些空间 */
-        border-radius: 4px; /* 轻微的圆角效果 */
-        text-align: center; /* 文字居中 */
-        font-size: 1em; /* 字号大小 */
-    }
-
-    .error {
-        color: #e70909
-    }
+        .error {
+            color: #e70909
+        }
     </style>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <title>Document</title>
 </head>
 <body>
     <h2 class="header-2">This is the Place Where You Could Find Kindred Spirits.</h2>
@@ -148,14 +147,25 @@
                 {% endif %}
             </div>
             <div class="login-actions">
-                <!-- <button type="submit">Login</button>
-                <p> Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p> -->
-                
                 <input type="submit" value="Login">
                 <div>Don't have an account? <a href="/register/">Register here.</a></div>
             </div>
         </form>
     </div>
-    
 </body>
 </html>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-text">© 2024 Spring PBC Final Project</div>
+        <div class="footer-icon">
+            <a href="https://github.com/Bai1026/PBC_Final_Project/tree/main" target="_blank">
+                <img src="{% static 'images/github.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+            <a href="mailto:b09602017@ntu.edu.tw" target="_blank">
+                <img src="{% static 'images/email.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+        </div>
+    </div>
+</footer>
+

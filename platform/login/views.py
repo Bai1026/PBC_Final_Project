@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -14,7 +15,13 @@ def user_login(request):
             login(request, user)
             return redirect('welcome')
         else:
-            return render(request, 'login/login.html', {'error': 'Password Incorrect!'})
+            # Check if user exists
+            if User.objects.filter(username=username).exists():
+                error_message = "Password is incorrect."
+            else:
+                error_message = "Account doesn't exist."
+            
+            return render(request, 'login/login.html', {'error': error_message})
     else:
         return render(request, 'login/login.html')
 
@@ -44,6 +51,12 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'login/register.html', {'form': form})
+
+
+def matching(request):
+    # Assuming you have a UserProfile model where user profiles are stored
+    profiles = UserProfile.objects.all()  # Fetch all profiles from the database
+    return render(request, 'matching.html', {'profiles': profiles})
 
 
 from django.urls import reverse_lazy

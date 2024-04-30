@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,13 +44,32 @@
             background-color: #45a049;
         }
     </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <title>Document</title>
 </head>
 <body>
     <form method="post">
         {% csrf_token %}
-        <h2>Register</h2>
+        <h2>Register Page</h2>
         {{ form.as_p }}
         <button type="submit">Register</button>
     </form>
 </body>
 </html>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-text">© 2024 Spring PBC Final Project</div>
+        <div class="footer-icon">
+            <a href="https://github.com/Bai1026/PBC_Final_Project/tree/main" target="_blank">
+                <img src="{% static 'images/github.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+            <a href="mailto:b09602017@ntu.edu.tw" target="_blank">
+                <img src="{% static 'images/email.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+        </div>
+    </div>
+</footer>

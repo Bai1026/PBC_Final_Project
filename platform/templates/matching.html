@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            /* justify-content: center; */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .profile {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;  /* Adjusted width */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: start;  /* Center text alignment */
+        }
+
+        .profile img {
+            width: 250px;  /* Standard size for all images */
+            border-radius: 50%;  /* Circular image */
+            object-fit: cover;  /* Ensures the image covers the area without distortion */
+            margin-bottom: 20px;
+        }
+
+        .profile p {
+            margin: 5px 0;
+            color: #333;
+            line-height: 1.4;
+            font-size: 16px;  /* Slightly larger font for readability */
+            width: 100%;  /* Full width to align text properly */
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <title>Matching Profiles</title>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <!-- Additional CSS or links here -->
+</head>
+
+<body>
+    <h1>Matching Platform</h1>
+    <div class="profile-container">
+        {% for profile in profiles %}
+        <div class="profile">
+            {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" alt="Profile Picture">
+            {% else %}
+                {% if profile.gender == 'M' %}
+                    <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                {% elif profile.gender == 'F' %}
+                    <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                {% else %}
+                    <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                {% endif %}
+            {% endif %}
+            <p>Name: {{ profile.user.username }}</p>
+            <p>Destination: {{ profile.destination|default_if_none:"Not specified" }}</p>
+            <p>Age: {{ profile.age|default_if_none:"Unknown" }}</p>
+            <p>Exchange School: {{ profile.exchange_school|default_if_none:"Not specified" }}</p>
+            <p>Gender: {{ profile.get_gender_display|default_if_none:"Not specified" }}</p>
+        </div>
+        {% empty %}
+        <p>No profiles found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-text">© 2024 Spring PBC Final Project</div>
+        <div class="footer-icon">
+            <a href="https://github.com/Bai1026/PBC_Final_Project/tree/main" target="_blank">
+                <img src="{% static 'images/github.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+            <a href="mailto:b09602017@ntu.edu.tw" target="_blank">
+                <img src="{% static 'images/email.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+        </div>
+    </div>
+</footer>

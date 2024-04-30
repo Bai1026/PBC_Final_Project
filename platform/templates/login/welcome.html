@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,37 +10,53 @@
             margin: 40px;
         }
         .content {
-            background: white;
+            background: rgb(251, 251, 251);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         img {
             border-radius: 50%;
-            margin-top: 10px;
+            margin-top: 20px;
         }
         p {
             color: #333;
         }
-        a {
+
+        .button {
             display: inline-block;
-            background: #007BFF;
-            color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px; /* Adds space between the buttons */
         }
-        a:hover {
-            background-color: #0056b3;
+        .edit-profile {
+            background-color: #4CAF50; /* Green */
+        }
+        .start-journey {
+            background-color: #008CBA; /* Blue */
+        }
+        .log-out {
+            background-color: #ef7b33; /* Blue */
+        }
+        .edit-profile:hover, .start-journey:hover {
+            opacity: 0.8;
         }
     </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <title>Document</title>
 </head>
 <body>
     <div class="content">
-        <h3>Welcome, {{ username }}! Please enjoy your journey!</h3>
+        <h2>Welcome, {{ username }}! Please enjoy your journey!</h2>
         {% if profile.avatar %}
-            <img src="{{ profile.avatar.url }}" alt="Your avatar" width="200">
+            <img src="{{ profile.avatar.url }}" alt="Your avatar" width="250">
         {% endif %}
         <p>Destination: {{ profile.destination }}</p>
         <p>Age: {{ profile.age }}</p>
@@ -47,7 +64,25 @@
         <p>Start Date: {{ profile.start_date }}</p>
         <p>End Date: {{ profile.end_date }}</p>
         <p>Gender: {{ profile.get_gender_display }}</p>
-        <a href="{% url 'update_profile' %}">Edit Profile</a>
+        <div>
+            <a href="{% url 'matching' %}" class="button start-journey">Start Your Journey</a>
+            <a href="{% url 'update_profile' %}" class="button edit-profile">Edit Profile</a>
+            <a href="{% url 'login' %}" class="button log-out">Log Out</a>
+        </div>
     </div>
 </body>
 </html>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-text">© 2024 Spring PBC Final Project</div>
+        <div class="footer-icon">
+            <a href="https://github.com/Bai1026/PBC_Final_Project/tree/main" target="_blank">
+                <img src="{% static 'images/github.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+            <a href="mailto:b09602017@ntu.edu.tw" target="_blank">
+                <img src="{% static 'images/email.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+        </div>
+    </div>
+</footer>

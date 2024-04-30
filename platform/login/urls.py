@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import user_login, welcome, register, UserProfileUpdate
+from .views import user_login, welcome, register, matching, UserProfileUpdate
 
 urlpatterns = [
     # 你的其他URL模式
@@ -8,4 +8,5 @@ urlpatterns = [
     path('welcome/', welcome, name='welcome'),
     path('register/', register, name='register'),
     path('profile/update/', UserProfileUpdate.as_view(), name='update_profile'),
+    path('matching/', matching, name='matching')
 ]

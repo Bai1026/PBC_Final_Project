@@ -7,7 +7,6 @@
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
-            /* justify-content: center; */
             gap: 20px;
             padding: 20px;
         }
@@ -48,6 +47,11 @@
                 align-items: center;
             }
         }
+
+        .current-user {
+            border-color: #4CAF50; /* Green border for the current user */
+            background-color: #f0fff0; /* Lighter background for emphasis */
+        }
     </style>
 
     <title>Matching Profiles</title>
@@ -58,6 +62,24 @@
 <body>
     <h1>Matching Platform</h1>
     <div class="profile-container">
+        <div class="profile current-user">
+            {% if current_user_profile.avatar %}
+                <img src="{{ current_user_profile.avatar.url }}" alt="Profile Picture">
+            {% else %}
+                {% if current_user_profile.gender == 'M' %}
+                    <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                {% elif current_user_profile.gender == 'F' %}
+                    <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                {% else %}
+                    <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                {% endif %}
+            {% endif %}
+            <p>Name: {{ current_user_profile.user.username }}</p>
+            <p>Destination: {{ current_user_profile.destination|default_if_none:"Not specified" }}</p>
+            <p>Age: {{ current_user_profile.age|default_if_none:"Unknown" }}</p>
+            <p>Exchange School: {{ current_user_profile.exchange_school|default_if_none:"Not specified" }}</p>
+            <p>Gender: {{ current_user_profile.get_gender_display|default_if_none:"Not specified" }}</p>
+        </div>
         {% for profile in profiles %}
         <div class="profile">
             {% if profile.avatar %}

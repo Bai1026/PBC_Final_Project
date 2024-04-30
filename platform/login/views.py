@@ -2,9 +2,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
 from .forms import UserRegistrationForm
 from .models import UserProfile
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -20,7 +20,6 @@ def user_login(request):
                 error_message = "Password is incorrect."
             else:
                 error_message = "Account doesn't exist."
-            
             return render(request, 'login/login.html', {'error': error_message})
     else:
         return render(request, 'login/login.html')
@@ -52,11 +51,28 @@ def register(request):
         form = UserRegistrationForm()
     return render(request, 'login/register.html', {'form': form})
 
+# @login_required
+# def matching(request):
+#     # Assuming you have a UserProfile model where user profiles are stored
+#     profiles = UserProfile.objects.all()  # Fetch all profiles from the database
+#     return render(request, 'matching.html', {'profiles': profiles})
 
-def matching(request):
-    # Assuming you have a UserProfile model where user profiles are stored
-    profiles = UserProfile.objects.all()  # Fetch all profiles from the database
-    return render(request, 'matching.html', {'profiles': profiles})
+from django.shortcuts import render, get_object_or_404
+
+@login_required
+def user_matching(request, username):
+    user = get_object_or_404(User, username=username)
+
+    if request.user != user:
+        return render(request, 'errors/403.html', status=403)
+
+    profiles = UserProfile.objects.all().exclude(user=user)
+    current_user_profile = UserProfile.objects.get(user=user)
+    return render(request, 'matching.html', {
+        'profiles': profiles,
+        'current_user_profile': current_user_profile
+    })
+
 
 
 from django.urls import reverse_lazy

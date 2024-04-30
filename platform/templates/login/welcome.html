@@ -65,7 +65,7 @@
         <p>End Date: {{ profile.end_date }}</p>
         <p>Gender: {{ profile.get_gender_display }}</p>
         <div>
-            <a href="{% url 'matching' %}" class="button start-journey">Start Your Journey</a>
+            <a href="{% url 'user_matching' username=request.user.username %}" class="button start-journey">Start Your Journey</a>
             <a href="{% url 'update_profile' %}" class="button edit-profile">Edit Profile</a>
             <a href="{% url 'login' %}" class="button log-out">Log Out</a>
         </div>

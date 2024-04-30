@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <!-- <h1>Welcome {{ username }}!</h1> -->
+
+    <!-- login/templates/login/welcome.html -->
+    <p>Welcome, {{ username }}!</p>
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="Your avatar" width="250">
+    {% endif %}
+    <p>Destination: {{ profile.destination }}</p>
+    <p>Age: {{ profile.age }}</p>
+    <p>Exchange School: {{ profile.exchange_school }}</p>
+    <p>Start Date: {{ profile.start_date }}</p>
+    <p>End Date: {{ profile.end_date }}</p>
+    <p>Gender: {{ profile.get_gender_display }}</p>
+    <a href="{% url 'update_profile' %}">Edit Profile</a>
+    
+</body>
+</html>

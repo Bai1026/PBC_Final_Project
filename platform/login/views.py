@@ -14,7 +14,7 @@ def user_login(request):
             login(request, user)
             return redirect('welcome')
         else:
-            return render(request, 'login/login.html', {'error': 'Invalid credentials'})
+            return render(request, 'login/login.html', {'error': 'Password Incorrect!'})
     else:
         return render(request, 'login/login.html')
 

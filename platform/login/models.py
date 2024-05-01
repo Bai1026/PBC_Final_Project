@@ -28,18 +28,6 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         instance.userprofile.save()
 
 
-# class HiddenProfile(models.Model):
-#     user = models.ForeignKey(User, related_name='hiding_user', on_delete=models.CASCADE)
-#     hidden_user = models.ForeignKey(User, related_name='hidden_user', on_delete=models.CASCADE)
-
-#     class Meta:
-#         unique_together = ('user', 'hidden_user')  # Ensure no duplicate entries
-
-
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     # additional fields
-
 class HiddenProfile(models.Model):
     user = models.ForeignKey(User, related_name='hiding_user', on_delete=models.CASCADE)
     hidden_user = models.ForeignKey(UserProfile, related_name='hidden_profile', on_delete=models.CASCADE)

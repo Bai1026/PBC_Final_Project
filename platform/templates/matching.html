@@ -68,7 +68,7 @@
         .matching {
             background-color: #4CAF50; /* Green */
         }
-        .report {
+        .hide {
             background-color: #7f8b8f; /* Blue */
         }
         .edit-profile {
@@ -82,10 +82,11 @@
         }
     </style>
 
-    <title>Matching Profiles</title>
+    <title>Matching Platform</title>
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <!-- Additional CSS or links here -->
 </head>
+
 
 <body>
     <h1>Matching Platform</h1>
@@ -108,7 +109,7 @@
             <p>Exchange School: {{ current_user_profile.exchange_school|default_if_none:"Not specified" }}</p>
             <p>Gender: {{ current_user_profile.get_gender_display|default_if_none:"Not specified" }}</p>
             <div>
-                <a href="{% url 'register' %}" class="button edit-profile">Edit Profile</a>
+                <a href="{% url 'update_profile' %}" class="button edit-profile">Edit Profile</a>
                 <a href="{% url 'login' %}" class="button log-out">Log Out</a>
             </div>
         </div>
@@ -132,7 +133,7 @@
             <p>Gender: {{ profile.get_gender_display|default_if_none:"Not specified" }}</p>
             <div>
                 <a href="{% url 'login' %}" class="button matching">Match</a>
-                <a href="{% url 'login' %}" class="button report">Report</a>
+                <a href="{% url 'hide_profile' profile.user.username %}" class="button hide" onclick="return confirm('Are you sure you want to hide this profile?');">Hide</a>
             </div>
         </div>
         {% empty %}

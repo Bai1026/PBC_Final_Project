@@ -89,3 +89,10 @@ class UserProfileUpdate(UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user.userprofile
+
+
+def custom_403(request, exception):
+    return render(request, '403.html', {}, status=403)
+
+def custom_404(request, exception):
+    return render(request, '404.html', {}, status=404)

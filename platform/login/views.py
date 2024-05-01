@@ -39,16 +39,6 @@ def user_login(request):
         return render(request, 'login/login.html')
 
 
-@login_required
-def welcome(request):
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
-    context = {
-        'username': request.user.username,
-        'profile': profile,
-    }
-    return render(request, 'login/welcome.html', context)
-
-
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST, request.FILES)
@@ -57,6 +47,11 @@ def register(request):
             new_user.set_password(form.cleaned_data['password'])
             new_user.save()
 
+            # Create or update the user profile
+            profile_form = UserProfileForm(request.POST, request.FILES, instance=new_user.userprofile)
+            if profile_form.is_valid():
+                profile_form.save()
+                
             # after register, login the account automatically.
             login(request, new_user)
             # redirect to welcome page
@@ -64,6 +59,16 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'login/register.html', {'form': form})
+
+
+@login_required
+def welcome(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    context = {
+        'username': request.user.username,
+        'profile': profile,
+    }
+    return render(request, 'login/welcome.html', context)
 
 
 @login_required

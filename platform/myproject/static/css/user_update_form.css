@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif; /* Sets the font for the page */
+    background-color: #f4f4f4; /* Light grey background */
+    padding: 20px; /* Padding around the content */
+}
+
+.container {
+    background-color: #ffffff; /* White background for the form container */
+    border: 1px solid #ddd; /* Light grey border */
+    padding: 40px; /* Padding inside the container */
+    border-radius: 5px; /* Rounded corners */
+    width: 450px; /* Fixed width */
+    margin: 0 auto; /* Center the form */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+h1 {
+    color: #333; /* Dark grey color for the heading */
+    text-align: center; /* Center align the heading */
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Stack form fields vertically */
+}
+
+label {
+    margin-bottom: 5px; /* Space below each label */
+    color: #666; /* Medium grey color for text */
+    font-weight: bold; /* Makes the font bold */
+    /* margin-bottom: 10px; */
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+select {
+    padding: 8px; /* Padding inside inputs */
+    margin-top: 10px;
+    margin-bottom: 10px; /* Space below each input */
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Rounded corners for the inputs */
+    width: 100%; /* Full width */
+}
+
+input[type="checkbox"] {
+    margin-left: 10px; /* Space to the right of the checkbox */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker shade of green for hover */
+}

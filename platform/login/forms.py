@@ -1,11 +1,14 @@
-# login/forms.py
-
+import pycountry
 from django import forms
 from django.contrib.auth.models import User
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat Password', widget=forms.PasswordInput)
+
+    country_choices = [(country.alpha_2, country.name) for country in sorted(pycountry.countries, key=lambda x: x.name)]
+    country_choices.append(('Others', 'Others'))
+    nation = forms.ChoiceField(choices=(country_choices), required=False)
 
     destination = forms.CharField(max_length=100, required=False)
     age = forms.IntegerField(required=False)
@@ -21,12 +24,16 @@ class UserRegistrationForm(forms.ModelForm):
         required=False,
         label='End Date'
     )
-    gender = forms.ChoiceField(choices=(('M', 'Male'), ('F', 'Female')), required=False)
+    gender = forms.ChoiceField(choices=(('N', 'None'),('M', 'Male'), ('F', 'Female')),  required=False)
+
+    facebook = forms.CharField(required=False)
+    instagram = forms.CharField(required=False)
+    other_social_media = forms.CharField(required=False)
     avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'avatar')
+        fields = ('username', 'password', 'password2', 'nation', 'destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'instagram', 'facebook', 'other_social_media', 'avatar')
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -50,4 +57,4 @@ from .models import UserProfile
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile  # This should be UserProfile, not User
-        fields = ['destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'avatar']
+        fields = ['nation', 'destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'instagram', 'facebook', 'other_social_media', 'avatar']

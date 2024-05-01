@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 40px;
+}
+.content {
+    background: rgb(251, 251, 251);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+img {
+    border-radius: 50%;
+    margin-top: 20px;
+}
+img.profile-img {
+    width: 250px; /* Adjust the width as needed */
+    height: auto; /* Keeps the aspect ratio intact */
+    border-radius: 50%; /* Keeps the circle shape if desired */
+}   
+
+p {
+    color: #333;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    color: white;
+    font-weight: bold;
+    margin-right: 10px; /* Adds space between the buttons */
+}
+.edit-profile {
+    background-color: #4CAF50; /* Green */
+}
+.start-journey {
+    background-color: #008CBA; /* Blue */
+}
+.log-out {
+    background-color: #ef7b33; /* Blue */
+}
+.edit-profile:hover, .start-journey:hover, .log-out:hover {
+    opacity: 0.8;
+}
+

@@ -2,89 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .profile-container {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .profile {
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;  /* Adjusted width */
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: start;  /* Center text alignment */
-        }
-
-        .profile img {
-            width: 250px;  /* Standard size for all images */
-            border-radius: 50%;  /* Circular image */
-            object-fit: cover;  /* Ensures the image covers the area without distortion */
-            margin-bottom: 20px;
-        }
-
-        .profile p {
-            margin: 5px 0;
-            color: #333;
-            line-height: 1.4;
-            font-size: 16px;  /* Slightly larger font for readability */
-            width: 100%;  /* Full width to align text properly */
-            margin-bottom: 5px;
-        }
-
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 600px) {
-            .profile-container {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        .current-user {
-            border-color: #4CAF50; /* Green border for the current user */
-            background-color: #f0fff0; /* Lighter background for emphasis */
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            color: white;
-            font-weight: bold;
-            margin-right: 10px; /* Adds space between the buttons */
-            margin-top: 15px;
-        }
-        .matching {
-            background-color: #4CAF50; /* Green */
-        }
-        .hide {
-            background-color: #7f8b8f; /* Blue */
-        }
-        .edit-profile {
-            background-color: #4cb1e8; /* Blue */
-        }
-        .log-out {
-            background-color: #ef7b33; /* Blue */
-        }
-        .matching:hover, .report:hover, .log-out:hover, .edit-profile:hover {
-            opacity: 0.8;
-        }
-    </style>
-
     <title>Matching Platform</title>
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-    <!-- Additional CSS or links here -->
+    <link rel="stylesheet" href="{% static 'css/matching.css' %}">
 </head>
 
 

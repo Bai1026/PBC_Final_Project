@@ -8,6 +8,8 @@
         - We could see the log of changing in the login/migrations folder
     - `python manage.py makemigrations`
     - `python manage.py migrate`
+    - or directly use migrate.sh by `./migrate.sh`
+        - remember to `chmod +x migrate.sh` to open the execute mode.
 
 ## How to open the Django shell
 - `python manage.py shell` to open the shell

@@ -10,6 +10,31 @@
 
 <body>
     <h1>Matching Platform</h1>
+
+    <form method="POST" action="{% url 'filter_function' %}">
+        {% csrf_token %}
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination">
+    
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age">
+    
+        <label for="exchange_school">Exchange School:</label>
+        <input type="text" id="exchange_school" name="exchange_school">
+    
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="">Select Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select>
+
+        <button type="submit">Filter</button>
+        <button type="reset">Reset</button>
+        <form method="GET" action="{% url 'show_all_profiles' %}">
+            <button type="submit">Show All</button>
+    </form>
+
     <div class="profile-container">
         <div class="profile current-user">
             {% if current_user_profile.avatar %}
@@ -59,7 +84,6 @@
         {% empty %}
         <p>No profiles found.</p>
         {% endfor %}
-    </div>
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import handler403, handler404
-from .views import user_login, welcome, register, user_matching, hide_profile, UserProfileUpdate
+from .views import user_login, welcome, register, user_matching, hide_profile, UserProfileUpdate, filter_function, show_all_profiles
 
 urlpatterns = [
     # path('login/', user_login, name='login'),
@@ -8,9 +8,11 @@ urlpatterns = [
     path('welcome/', welcome, name='welcome'),
     path('register/', register, name='register'),
     path('profile/update/', UserProfileUpdate.as_view(), name='update_profile'),
-    path('<str:username>/matching/', user_matching, name='user_matching'),
-
+    path('<str:username>/matching/', user_matching, name='user_matching'), 
     path('hide-profile/<str:username>/', hide_profile, name='hide_profile'),
+    # 篩選路徑
+    path('filter/', filter_function, name='filter_function'),
+    path('show-all-profiles/', show_all_profiles, name='show_all_profiles')
 ]
 
 handler403 = 'login.views.custom_403'

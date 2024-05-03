@@ -1,3 +1,4 @@
 .DS_Store
 __pycache__
 record
+db.sqlite3platform/db.sqlite3

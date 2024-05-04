@@ -142,8 +142,6 @@ def filter_function(request):
         age = request.POST.get('age')
         exchange_school = request.POST.get('exchange_school')
         gender = request.POST.get('gender')
-        start_date = request.POST.get('start_date')  # 获取开始日期
-        end_date = request.POST.get('end_date')  # 获取结束日期
 
         # 构建筛选条件
         filter_params = {}
@@ -160,11 +158,11 @@ def filter_function(request):
             # 清空筛选参数
             filter_params = {}
 
-        # 根据筛选参数查询用户
-        filtered_profiles = UserProfile.objects.filter(**filter_params)
-        
         # 获取当前用户的profile
         current_user_profile = UserProfile.objects.get(user=request.user)
+        
+        # 根据筛选参数查询用户
+        filtered_profiles = UserProfile.objects.exclude(user=request.user).filter(**filter_params)
 
         # 渲染匹配页面，并传递筛选后的数据和当前用户的profile
         return render(request, 'matching.html', {
@@ -178,8 +176,8 @@ def filter_function(request):
 
 
 def show_all_profiles(request):
-    profiles = UserProfile.objects.all()
     current_user_profile = UserProfile.objects.get(user=request.user)
+    profiles = UserProfile.objects.exclude(user=request.user)
     return render(request, 'matching.html', {
         'profiles': profiles,
         'current_user_profile': current_user_profile

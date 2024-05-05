@@ -182,3 +182,20 @@ def show_all_profiles(request):
         'profiles': profiles,
         'current_user_profile': current_user_profile
     })
+
+
+def matching_list(request):
+    # Retrieve the current user's profile
+    current_user_profile = UserProfile.objects.get(user=request.user)
+
+    # Fetch the list of friends (users that are already matched)
+    friends = []
+
+    # Fetch the list of matching requests received by the current user
+    matching_requests_received = []
+
+    return render(request, 'matching.html', {
+        'friends': friends,
+        'matching_requests_received': matching_requests_received,
+        'current_user_profile': current_user_profile
+    })

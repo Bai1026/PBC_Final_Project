@@ -7,86 +7,115 @@
     <link rel="stylesheet" href="{% static 'css/matching.css' %}">
 </head>
 
-
-<body>
-    <h1>Matching Platform</h1>
-
-    <form method="POST" action="{% url 'filter_function' %}">
-        {% csrf_token %}
-        <label for="destination">Destination:</label>
-        <input type="text" id="destination" name="destination">
-    
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age">
-    
-        <label for="exchange_school">Exchange School:</label>
-        <input type="text" id="exchange_school" name="exchange_school">
-    
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender">
-            <option value="">Select Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-
-        <button type="submit">Filter</button>
-        <button type="reset">Reset</button>
-    </form>
-
-    <form method="GET" action="{% url 'show_all_profiles' %}">
-        <button type="submit">Show All</button>
-    </form>
-
-    <div class="profile-container">
-        <div class="profile current-user">
-            {% if current_user_profile.avatar %}
-                <img src="{{ current_user_profile.avatar.url }}" alt="Profile Picture">
-            {% else %}
-                {% if current_user_profile.gender == 'M' %}
-                    <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
-                {% elif current_user_profile.gender == 'F' %}
-                    <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
-                {% else %}
-                    <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
-                {% endif %}
-            {% endif %}
-            <p>Name: {{ current_user_profile.user.username }}</p>
-            <p>Destination: {{ current_user_profile.destination|default_if_none:"Not specified" }}</p>
-            <p>Age: {{ current_user_profile.age|default_if_none:"Unknown" }}</p>
-            <p>Exchange School: {{ current_user_profile.exchange_school|default_if_none:"Not specified" }}</p>
-            <p>Gender: {{ current_user_profile.get_gender_display|default_if_none:"Not specified" }}</p>
-            <div>
-                <a href="{% url 'update_profile' %}" class="button edit-profile">Edit Profile</a>
-                <a href="{% url 'login' %}" class="button log-out">Log Out</a>
-            </div>
+<body1>
+    <div class="title-box">
+        <h1>Matching Platform</h1>
+    </div>
+</body1>
+<body2>
+    <div class="menu">
+        <div class="friend-list">
+            <h3>My Friends</h3>
+            <ul>
+                {% for friend in friends %}
+                    <li>{{ friend }}</li>
+                {% empty %}
+                    <li>No friends yet.</li>
+                {% endfor %}
+            </ul>
         </div>
-        {% for profile in profiles %}
-        <div class="profile">
-            {% if profile.avatar %}
-                <img src="{{ profile.avatar.url }}" alt="Profile Picture">
-            {% else %}
-                {% if profile.gender == 'M' %}
-                    <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
-                {% elif profile.gender == 'F' %}
-                    <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
-                {% else %}
-                    <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
-                {% endif %}
-            {% endif %}
-            <p>Name: {{ profile.user.username }}</p>
-            <p>Destination: {{ profile.destination|default_if_none:"Not specified" }}</p>
-            <p>Age: {{ profile.age|default_if_none:"Unknown" }}</p>
-            <p>Exchange School: {{ profile.exchange_school|default_if_none:"Not specified" }}</p>
-            <p>Gender: {{ profile.get_gender_display|default_if_none:"Not specified" }}</p>
-            <div>
-                <a href="{% url 'login' %}" class="button matching">Match</a>
-                <a href="{% url 'hide_profile' profile.user.username %}" class="button hide" onclick="return confirm('Are you sure you want to hide this profile?');">Hide</a>
-            </div>
+        <div class="matching-request">
+            <h3>Matching Requests</h3>
+            <ul>
+                {% for request in matching_requests_received %}
+                    <li>{{ request }}</li>
+                {% empty %}
+                    <li>No matching requests yet.</li>
+                {% endfor %}
+            </ul>
         </div>
-        {% empty %}
-        <p>No profiles found.</p>
-        {% endfor %}
-</body>
+    </div>
+    <div class="content">
+        <div class="form-container">
+            <form method="POST" action="{% url 'filter_function' %}">
+                {% csrf_token %}
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination">
+            
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+            
+                <label for="exchange_school">Exchange School:</label>
+                <input type="text" id="exchange_school" name="exchange_school">
+            
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+
+                <button type="submit">Filter</button>
+                <button type="reset">Reset</button>
+            </form>
+
+            <form method="GET" action="{% url 'show_all_profiles' %}">
+                <!-- 保持 Show All 按钮为空白，以便在这里定义样式 -->
+                <button type="submit" class="show-all">Show All</button>
+            </form>
+        </div>
+        <div class="profile-container">
+            <div class="profile current-user">
+                {% if current_user_profile.avatar %}
+                    <img src="{{ current_user_profile.avatar.url }}" alt="Profile Picture">
+                {% else %}
+                    {% if current_user_profile.gender == 'M' %}
+                        <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                    {% elif current_user_profile.gender == 'F' %}
+                        <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                    {% else %}
+                        <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                    {% endif %}
+                {% endif %}
+                <p>Name: {{ current_user_profile.user.username }}</p>
+                <p>Destination: {{ current_user_profile.destination|default_if_none:"Not specified" }}</p>
+                <p>Age: {{ current_user_profile.age|default_if_none:"Unknown" }}</p>
+                <p>Exchange School: {{ current_user_profile.exchange_school|default_if_none:"Not specified" }}</p>
+                <p>Gender: {{ current_user_profile.get_gender_display|default_if_none:"Not specified" }}</p>
+                <div>
+                    <a href="{% url 'update_profile' %}" class="button edit-profile">Edit Profile</a>
+                    <a href="{% url 'login' %}" class="button log-out">Log Out</a>
+                </div>
+            </div>
+            {% for profile in profiles %}
+            <div class="profile">
+                {% if profile.avatar %}
+                    <img src="{{ profile.avatar.url }}" alt="Profile Picture">
+                {% else %}
+                    {% if profile.gender == 'M' %}
+                        <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                    {% elif profile.gender == 'F' %}
+                        <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                    {% else %}
+                        <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                    {% endif %}
+                {% endif %}
+                <p>Name: {{ profile.user.username }}</p>
+                <p>Destination: {{ profile.destination|default_if_none:"Not specified" }}</p>
+                <p>Age: {{ profile.age|default_if_none:"Unknown" }}</p>
+                <p>Exchange School: {{ profile.exchange_school|default_if_none:"Not specified" }}</p>
+                <p>Gender: {{ profile.get_gender_display|default_if_none:"Not specified" }}</p>
+                <div>
+                    <a href="{% url 'login' %}" class="button matching">Match</a>
+                    <a href="{% url 'hide_profile' profile.user.username %}" class="button hide" onclick="return confirm('Are you sure you want to hide this profile?');">Hide</a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No profiles found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body2>
 </html>
 
 <footer>

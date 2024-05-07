@@ -37,6 +37,7 @@
     </div>
     <div class="content">
         <div class="form-container">
+            <!-- 篩選表單 -->
             <form method="POST" action="{% url 'filter_function' %}">
                 {% csrf_token %}
                 <label for="destination">Destination:</label>
@@ -54,16 +55,17 @@
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                 </select>
-
                 <button type="submit">Filter</button>
                 <button type="reset">Reset</button>
             </form>
-
+            <!-- 顯示所有用戶的表單 -->
             <form method="GET" action="{% url 'show_all_profiles' %}">
                 <!-- 保持 Show All 按钮为空白，以便在这里定义样式 -->
                 <button type="submit" class="show-all">Show All</button>
             </form>
         </div>
+
+        <!-- 自己的個人信息欄位 -->
         <div class="profile-container">
             <div class="profile current-user">
                 {% if current_user_profile.avatar %}
@@ -87,7 +89,10 @@
                     <a href="{% url 'login' %}" class="button log-out">Log Out</a>
                 </div>
             </div>
+
+            <!-- 他人的個人信息欄位 -->
             {% for profile in profiles %}
+            {% if profile.user != current_user_profile.user %} <!-- 這裡篩選掉自己的欄位 -->
             <div class="profile">
                 {% if profile.avatar %}
                     <img src="{{ profile.avatar.url }}" alt="Profile Picture">
@@ -105,11 +110,16 @@
                 <p>Age: {{ profile.age|default_if_none:"Unknown" }}</p>
                 <p>Exchange School: {{ profile.exchange_school|default_if_none:"Not specified" }}</p>
                 <p>Gender: {{ profile.get_gender_display|default_if_none:"Not specified" }}</p>
-                <div>
-                    <a href="{% url 'login' %}" class="button matching">Match</a>
+                <!-- <div> -->
+                <div class="profile-actions">
+                    <!-- 縮小的 Match, Hide 和 Delete 按鈕 -->
+                    <!-- <a href="{% url 'login' %}" class="button matching">Match</a>   -->
+                    <a href="{% url 'user_matching' profile.user.username %}" class="button matching">Match</a> <!-- 使用 'user_matching' 名稱 -->
                     <a href="{% url 'hide_profile' profile.user.username %}" class="button hide" onclick="return confirm('Are you sure you want to hide this profile?');">Hide</a>
+                    <a href="{% url 'delete_profile' profile.user.username %}" class="button delete" onclick="return confirm('Are you sure you want to delete this profile?');">Delete</a>
                 </div>
             </div>
+            {% endif %} <!-- 這裡結束自己的過濾條件 -->
             {% empty %}
             <p>No profiles found.</p>
             {% endfor %}

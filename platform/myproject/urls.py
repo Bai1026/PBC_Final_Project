@@ -19,8 +19,15 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+# 導入自定義視圖，Max
+from login.views import delete_profile
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login/', include('login.urls')),
+    
+    # 使用者檔案刪除功能的路由
+    path('delete/<username>/', delete_profile, name='delete_profile'),
     path('', include('login.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

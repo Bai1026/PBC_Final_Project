@@ -106,11 +106,65 @@ form {
     width: 100%;  /* Full width to align text properly */
     margin-bottom: 5px;
 }
+/* Max */
+.profile-actions {
+    display: flex;  /* 使用彈性佈局 */
+    justify-content: space-between; /* 確保按鈕等間距 */
+    margin-top: 10px;
+    width: 100%; /* 使按鈕組合橫向排列 */ /* Mac*/
+}
 
+.button {
+    display: inline-block;  
+    /* padding: 10px 20px; */ /*原本*/
+    padding: 4px 8px; /* 縮小按鈕大小 */
+    margin: 2px; /* Max加 */
+    text-decoration: none;
+    border: none;  /* Max加 */
+    border-radius: 5px;
+    cursor: pointer; /* Max加 */
+    transition: background-color 0.3s;
+    color: white;
+    font-weight: bold;
+    /*原本
+    margin-right: 10px; // Adds space between the buttons //
+    margin-top: 15px;
+    */
+    background-color: #2c3e50; /* 預設按鈕顏色 */     /* Max改 */
+} 
+
+
+/* Max */
+.button:hover {
+    opacity: 0.8;
+}
+.matching {
+    background-color: #4CAF50; /* Green */
+}
+.hide {
+    background-color: #7f8b8f; /* 灰色按鈕 */
+}
+.delete {
+    background-color: #e53935; /* 紅色刪除按鈕 */
+}
+.edit-profile {
+    background-color: #4cb1e8; /* Blue */
+}
+.log-out {
+    background-color: #ef7b33; /* 橙色按鈕 */
+}
+
+
+/* .matching:hover, .report:hover, .log-out:hover, .edit-profile:hover, .delete:hover {
+    opacity: 0.8;
+} */
+
+
+/* Max 移到下面的*/
 /* Responsive adjustments for smaller screens */
 @media (max-width: 600px) {
     .profile-container {
-        flex-direction: column;
+        flex-direction: column; /* 小屏幕下垂直佈局 */
         align-items: center;
     }
 }
@@ -118,31 +172,4 @@ form {
 .current-user {
     border-color: #4CAF50; /* Green border for the current user */
     background-color: #f0fff0; /* Lighter background for emphasis */
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    color: white;
-    font-weight: bold;
-    margin-right: 10px; /* Adds space between the buttons */
-    margin-top: 15px;
-}
-.matching {
-    background-color: #4CAF50; /* Green */
-}
-.hide {
-    background-color: #7f8b8f; /* Blue */
-}
-.edit-profile {
-    background-color: #4cb1e8; /* Blue */
-}
-.log-out {
-    background-color: #ef7b33; /* Blue */
-}
-.matching:hover, .report:hover, .log-out:hover, .edit-profile:hover {
-    opacity: 0.8;
 }

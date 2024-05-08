@@ -1,11 +1,8 @@
 from django.urls import path
 from django.conf.urls import handler403, handler404
-<<<<<<< HEAD
-# from .views import user_login, welcome, register, user_matching, hide_profile, UserProfileUpdate, filter_function, show_all_profiles, matching_list
-=======
+
 # from .views import user_login, welcome, register, user_matching, hide_profile, UserProfileUpdate, filter_function, show_all_profiles, matching_list
 from .views import user_login, welcome, register, user_matching, hide_profile,  delete_profile, UserProfileUpdate, filter_function, show_all_profiles, matching_list
->>>>>>> 86768c7 (WIP: Save local changes before merging)
 
 urlpatterns = [
     # path('login/', user_login, name='login'),

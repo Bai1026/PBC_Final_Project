@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+    'error_handlers',
+    'matching',
+    'welcome',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+handler403 = 'error_handlers.views.custom_403'
+handler404 = 'error_handlers.views.custom_404'

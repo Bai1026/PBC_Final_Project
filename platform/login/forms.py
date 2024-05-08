@@ -1,6 +1,8 @@
 import pycountry
 from django import forms
 from django.contrib.auth.models import User
+from .models import UserProfile
+
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -53,7 +55,6 @@ class UserRegistrationForm(forms.ModelForm):
         return cleaned_data
 
 
-from .models import UserProfile
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile  # This should be UserProfile, not User

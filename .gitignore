@@ -2,3 +2,4 @@
 __pycache__
 record
 db.sqlite3platform/db.sqlite3
+cache

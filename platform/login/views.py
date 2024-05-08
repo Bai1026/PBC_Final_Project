@@ -29,7 +29,9 @@ def user_login(request):
             # Clear hidden profiles before logging in
             HiddenProfile.objects.filter(user=user).delete()
             login(request, user)
-            return redirect('welcome')
+            # return redirect('welcome')
+            return redirect('welcome', username=user.username)
+
         else:
             if User.objects.filter(username=username).exists():
                 error_message = "Password is incorrect."
@@ -55,18 +57,33 @@ def register(request):
                 
             # after register, login the account automatically.
             login(request, new_user)
+
             # redirect to welcome page
-            return redirect('welcome')
+            # return redirect('welcome')
+            return redirect('welcome', username=new_user.username)
+
     else:
         form = UserRegistrationForm()
     return render(request, 'login/register.html', {'form': form})
 
 
+# @login_required
+# def welcome(request):
+#     profile, created = UserProfile.objects.get_or_create(user=request.user)
+#     context = {
+#         'username': request.user.username,
+#         'profile': profile,
+#     }
+#     return render(request, 'login/welcome.html', context)
 @login_required
-def welcome(request):
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
+def welcome(request, username):
+    user = get_object_or_404(User, username=username)
+    if request.user != user:
+        return render(request, 'errors/403.html', status=403)
+    
+    profile, created = UserProfile.objects.get_or_create(user=user)
     context = {
-        'username': request.user.username,
+        'username': user.username,
         'profile': profile,
     }
     return render(request, 'login/welcome.html', context)
@@ -167,15 +184,30 @@ def delete_profile(request, username):
     return redirect('user_matching', username=request.user.username)
 
 
+# class UserProfileUpdate(UpdateView):
+#     model = UserProfile
+#     form_class = UserProfileForm
+    
+#     # change to register web to update the profile
+#     template_name = 'login/register.html'
+#     success_url = reverse_lazy('welcome')
+
+#     def get_object(self, queryset=None):
+#         return self.request.user.userprofile
+
 class UserProfileUpdate(UpdateView):
     model = UserProfile
     form_class = UserProfileForm
-    
-    # change to register web to update the profile
     template_name = 'login/register.html'
-    success_url = reverse_lazy('welcome')
+    success_url = reverse_lazy('welcome')  # You might need to adjust this
 
     def get_object(self, queryset=None):
+        username = self.kwargs.get('username')
+        user = get_object_or_404(User, username=username)
+        if self.request.user != user:
+            # Optionally raise a permission denied
+            from django.core.exceptions import PermissionDenied
+            raise PermissionDenied
         return self.request.user.userprofile
 
 

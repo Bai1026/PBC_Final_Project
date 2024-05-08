@@ -85,7 +85,8 @@
                 <p>Exchange School: {{ current_user_profile.exchange_school|default_if_none:"Not specified" }}</p>
                 <p>Gender: {{ current_user_profile.get_gender_display|default_if_none:"Not specified" }}</p>
                 <div>
-                    <a href="{% url 'update_profile' %}" class="button edit-profile">Edit Profile</a>
+                    <a href="{% url 'update_profile' username=user.username %}" class="button edit-profile">Update Profile</a>
+        
                     <a href="{% url 'login' %}" class="button log-out">Log Out</a>
                 </div>
             </div>

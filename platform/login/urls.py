@@ -7,10 +7,13 @@ from .views import user_login, welcome, register, user_matching, hide_profile,  
 urlpatterns = [
     # path('login/', user_login, name='login'),
     path('', user_login, name='login'),
-    path('welcome/', welcome, name='welcome'),
     path('register/', register, name='register'),
-    path('profile/update/', UserProfileUpdate.as_view(), name='update_profile'),
 
+    # path('profile/update/', UserProfileUpdate.as_view(), name='update_profile'),
+    path('profile/update/<str:username>/', UserProfileUpdate.as_view(), name='update_profile'),
+    # path('update/<str:username>/', UserProfileUpdate.as_view(), name='update_profile'),
+    path('welcome/<str:username>/', welcome, name='welcome'),
+    
     # Max part
     # path('<str:username>/matching/', user_matching, name='user_matching'), 
     path('matching/<str:username>/', user_matching, name='user_matching'),  # 添加此路由

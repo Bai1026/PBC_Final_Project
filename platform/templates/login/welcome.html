@@ -32,7 +32,7 @@
         <p>Gender: {{ profile.get_gender_display }}</p>
         <div>
             <a href="{% url 'user_matching' username=request.user.username %}" class="button start-journey">Start Your Journey</a>
-            <a href="{% url 'update_profile' %}" class="button edit-profile">Edit Profile</a>
+            <a href="{% url 'update_profile' username=request.user.username %}" class="button edit-profile">Update Profile</a>
             <a href="{% url 'login' %}" class="button log-out">Log Out</a>
         </div>
     </div>

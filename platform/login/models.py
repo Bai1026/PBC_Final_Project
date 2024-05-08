@@ -38,9 +38,9 @@ class HiddenProfile(models.Model):
     user = models.ForeignKey(User, related_name='hiding_user', on_delete=models.CASCADE)
     hidden_user = models.ForeignKey(UserProfile, related_name='hidden_profile', on_delete=models.CASCADE)
     hide_count = models.IntegerField(default=1)  # Tracks how often a profile has been hidden
+
     # Max part
     is_deleted = models.BooleanField(default=False)  # 確保這個欄位存在
-
 
     class Meta:
         unique_together = ('user', 'hidden_user')  # Ensures uniqueness

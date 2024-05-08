@@ -14,7 +14,6 @@ urlpatterns = [
     # Max part
     # path('<str:username>/matching/', user_matching, name='user_matching'), 
     path('matching/<str:username>/', user_matching, name='user_matching'),  # 添加此路由
-
     path('hide-profile/<str:username>/', hide_profile, name='hide_profile'),
     # Max
     path('delete/<username>/', delete_profile, name='delete_profile'),

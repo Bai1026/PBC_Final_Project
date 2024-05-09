@@ -34,3 +34,7 @@ users = User.objects.all()
 for user in users:
     print(user)
 ```
+
+## Architecture
+- All the HTML files are in [template](https://github.com/Bai1026/PBC_Final_Project/tree/main/platform/templates) folder
+- ALl the css files are in [myproject/static/css](https://github.com/Bai1026/PBC_Final_Project/tree/main/platform/myproject/static/css) folder

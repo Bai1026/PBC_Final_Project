@@ -32,7 +32,9 @@ def user_matching(request, username):
     deleted_profiles = DeletedProfile.objects.filter(user=user).values_list('deleted_user__id', flat=True)
 
     # 篩選掉被當前用戶隱藏的用戶和自己
-    profiles = UserProfile.objects.exclude(user__in=hidden_profiles).exclude(user__in=deleted_profiles).exclude(user=user)
+    # profiles = UserProfile.objects.exclude(user__in=hidden_profiles).exclude(user__in=deleted_profiles).exclude(user=user)
+    profiles = UserProfile.objects.exclude(user__in=deleted_profiles).exclude(user=user)
+
 
     # Order profiles by the number of times they have been hidden
     profiles = profiles.annotate(

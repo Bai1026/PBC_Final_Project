@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
 from login.forms import UserRegistrationForm, UserProfileForm
-from login.models import UserProfile, HiddenProfile
+from login.models import UserProfile, HiddenProfile, DeletedProfile
 from login.views import UserProfileUpdate
 
 from .delete import delete_profile
@@ -28,8 +28,11 @@ def user_matching(request, username):
     # Fetch profiles not hidden by the current user
     hidden_profiles = HiddenProfile.objects.filter(user=user).values_list('hidden_user__id', flat=True)
 
+    # 查找已被刪除的用戶
+    deleted_profiles = DeletedProfile.objects.filter(user=user).values_list('deleted_user__id', flat=True)
+
     # 篩選掉被當前用戶隱藏的用戶和自己
-    profiles = UserProfile.objects.exclude(user__in=hidden_profiles).exclude(user=user)
+    profiles = UserProfile.objects.exclude(user__in=hidden_profiles).exclude(user__in=deleted_profiles).exclude(user=user)
 
     # Order profiles by the number of times they have been hidden
     profiles = profiles.annotate(
@@ -41,11 +44,6 @@ def user_matching(request, username):
             )
         )
     ).order_by('total_hide_count')
-
-    # Max part
-    # Fetch profiles not hidden or deleted by the current user
-    excluded_profiles = HiddenProfile.objects.filter(user=user, is_deleted=True).values_list('hidden_user__id', flat=True)
-    profiles = UserProfile.objects.exclude(user__in=excluded_profiles)
 
     # 獲取當前用戶的 profile 信息
     current_user_profile = UserProfile.objects.get(user=user)

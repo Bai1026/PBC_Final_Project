@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from login.models import User, UserProfile
+from login.models import DeletedProfile
 
 # Max part
 @login_required
@@ -15,21 +16,13 @@ def delete_profile(request, username):
     user_to_delete = get_object_or_404(User, username=username)
     user_profile_to_delete = UserProfile.objects.get(user=user_to_delete)
 
-    # 檢查是否已經存在隱藏/刪除記錄
-    # hidden_profile, created = HiddenProfile.objects.get_or_create(user=request.user, hidden_user=user_profile_to_delete)
-    # hidden_profile.is_deleted = True  # 標記為完全刪除
-    # hidden_profile.save()
+    # 檢查是否已經存在刪除記錄
+    deleted_profile, created = DeletedProfile.objects.get_or_create(user=request.user, deleted_user=user_profile_to_delete)
 
-    # 嘗試獲取對應的 UserProfile，如果存在則一併刪除
-    try:
-        user_profile_to_delete = UserProfile.objects.get(user=user_to_delete)
-        user_profile_to_delete.delete()
-    except UserProfile.DoesNotExist:
-        pass
+    if not created:
+        messages.info(request, f"{username} is already deleted.")
+    else:
+        messages.success(request, f"User {username} has been permanently removed from your interface.")
 
-    # 永久刪除該用戶
-    user_to_delete.delete()
-
-
-    messages.success(request, "User profile has been deleted successfully.")
+    # 返回匹配頁面
     return redirect('user_matching', username=request.user.username)

@@ -1,0 +1,29 @@
+.wrapper {
+    overflow: hidden;
+    border-radius: 50%;
+    width: 200px; /* Adjust the width as needed */
+    height: auto; /* Keeps the aspect ratio intact */
+    margin-top: 20px;
+}
+
+.pedro {
+    width: 100%; /* This will make the image fill the container */
+    height: auto; /* Maintain the aspect ratio */
+    animation: bounce 200ms linear infinite alternate;
+}
+
+@keyframes bounce {
+    to {
+        transform: translateY(20px);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(-1turn);
+    }
+}
+
+.wrapper {
+    animation: spin 10s linear infinite;
+}

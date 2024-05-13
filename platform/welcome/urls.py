@@ -7,6 +7,6 @@ from login.views import UserProfileUpdate
 
 
 urlpatterns = [
-    path('profile/update/<str:username>/', UserProfileUpdate.as_view(), name='update_profile'),
-    path('welcome/<str:username>/', welcome, name='welcome'),
+    path('profile_update/<str:username>/', UserProfileUpdate.as_view(), name='update_profile'),
+    path('<str:username>/', welcome, name='welcome'),
 ]

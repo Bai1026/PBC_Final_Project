@@ -62,16 +62,31 @@ def register(request):
         form = UserRegistrationForm()
     return render(request, 'login/register.html', {'form': form})
 
+# class UserProfileUpdate(UpdateView):
+#     model = UserProfile
+#     form_class = UserProfileForm
+#     template_name = 'login/register.html'
+#     success_url = reverse_lazy('welcome')  # You might need to adjust this
+
+#     def get_object(self, queryset=None):
+#         username = self.kwargs.get('username')
+#         user = get_object_or_404(User, username=username)
+#         if self.request.user != user:
+#             # Optionally raise a permission denied
+#             raise PermissionDenied
+#         return self.request.user.userprofile
+
 class UserProfileUpdate(UpdateView):
     model = UserProfile
     form_class = UserProfileForm
     template_name = 'login/register.html'
-    success_url = reverse_lazy('welcome')  # You might need to adjust this
+
+    def get_success_url(self):
+        return reverse_lazy('user_matching', kwargs={'username': self.kwargs['username']})
 
     def get_object(self, queryset=None):
         username = self.kwargs.get('username')
         user = get_object_or_404(User, username=username)
         if self.request.user != user:
-            # Optionally raise a permission denied
             raise PermissionDenied
         return self.request.user.userprofile

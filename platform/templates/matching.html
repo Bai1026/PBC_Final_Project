@@ -14,6 +14,26 @@
 </body1>
 <body2>
     <div class="menu">
+        <div class="current-user">
+            <div class="current-user-information">
+                {% if current_user_profile.avatar %}
+                    <img src="{{ current_user_profile.avatar.url }}" alt="Profile Picture">
+                {% else %}
+                    {% if current_user_profile.gender == 'M' %}
+                        <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                    {% elif current_user_profile.gender == 'F' %}
+                        <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                    {% else %}
+                        <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                    {% endif %}
+                {% endif %}
+                <p>{{ current_user_profile.user.username }}</p>
+            </div>
+            <div class="current-user-actions">
+                <a href="{% url 'update_profile' username=current_user_profile.user.username %}" class="update-profile-button">Update Profile</a>
+                <a href="{% url 'login' %}" class="log-out-button">Log Out</a>
+            </div>
+        </div>
         <div class="friend-list">
             <h3>My Friends</h3>
             <ul>
@@ -67,29 +87,6 @@
 
         <!-- 自己的個人信息欄位 -->
         <div class="profile-container">
-            <div class="profile current-user">
-                {% if current_user_profile.avatar %}
-                    <img src="{{ current_user_profile.avatar.url }}" alt="Profile Picture">
-                {% else %}
-                    {% if current_user_profile.gender == 'M' %}
-                        <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
-                    {% elif current_user_profile.gender == 'F' %}
-                        <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
-                    {% else %}
-                        <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
-                    {% endif %}
-                {% endif %}
-                <p>Name: {{ current_user_profile.user.username }}</p>
-                <p>Destination: {{ current_user_profile.destination|default_if_none:"Not specified" }}</p>
-                <p>Age: {{ current_user_profile.age|default_if_none:"Unknown" }}</p>
-                <p>Exchange School: {{ current_user_profile.exchange_school|default_if_none:"Not specified" }}</p>
-                <p>Gender: {{ current_user_profile.get_gender_display|default_if_none:"Not specified" }}</p>
-                <div>
-                    <a href="{% url 'update_profile' username=user.username %}" class="button edit-profile">Update Profile</a>
-        
-                    <a href="{% url 'login' %}" class="button log-out">Log Out</a>
-                </div>
-            </div>
 
             <!-- 他人的個人信息欄位 -->
             {% for profile in profiles %}

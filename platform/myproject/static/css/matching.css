@@ -92,9 +92,11 @@ form {
 }
 
 .profile img {
-    width: 250px;  /* Standard size for all images */
-    border-radius: 50%;  /* Circular image */
-    object-fit: cover;  /* Ensures the image covers the area without distortion */
+    width: 230px; /* 调整头像大小 */
+    height: 230px; /* 调整头像大小 */
+    border-radius: 50%; /* 保持圆形 */
+    object-fit: cover; /* 保持图片比例 */
+    margin-top: 15px;
     margin-bottom: 20px;
 }
 
@@ -189,10 +191,12 @@ form {
 }
 
 .menu .current-user img {
-    width: 100px; /* 调整头像大小 */
-    height: 100px; /* 调整头像大小 */
+    width: 90px; /* 调整头像大小 */
+    height: 90px; /* 调整头像大小 */
     border-radius: 50%; /* 保持圆形 */
     object-fit: cover; /* 保持图片比例 */
+    margin-top: 5px;
+    margin-left: 8px;
     margin-bottom: 0px;
 }
 
@@ -209,7 +213,7 @@ form {
 .menu .current-user .current-user-actions {
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 8px;
+    margin-left: 10px;
     display: flex;
     flex-direction: column; /* 上下排列 */
 }
@@ -224,11 +228,11 @@ form {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 5px;
-    margin-bottom: 5px;
-    width: 125px; /* 调整按钮宽度 */
-    height: 40px; /* 调整按钮高度 */
+    margin-bottom: 7px;
+    width: 123px; /* 调整按钮宽度 */
+    height: 38px; /* 调整按钮高度 */
     text-align: center; /* 文本居中 */
-    line-height: 40px; /* 与按钮高度一致，实现垂直居中 */
+    line-height: 38px; /* 与按钮高度一致，实现垂直居中 */
     font-weight: bold;
 }
 .menu .current-user .update-profile-button:hover {
@@ -242,12 +246,12 @@ form {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 5px;
+    margin-top: 7px;
     margin-bottom: 5px;
-    width: 125px; /* 调整按钮宽度 */
-    height: 40px; /* 调整按钮高度 */
+    width: 123px; /* 调整按钮宽度 */
+    height: 38px; /* 调整按钮高度 */
     text-align: center; /* 文本居中 */
-    line-height: 40px; /* 与按钮高度一致，实现垂直居中 */
+    line-height: 38px; /* 与按钮高度一致，实现垂直居中 */
     font-weight: bold;
 }
 .menu .current-user .log-out-button:hover {

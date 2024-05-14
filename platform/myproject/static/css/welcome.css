@@ -9,15 +9,13 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-img {
-    border-radius: 50%;
-    margin-top: 20px;
+.content img {
+    width: 250px; /* 调整头像大小 */
+    height: 250px; /* 调整头像大小 */
+    border-radius: 50%; /* 保持圆形 */
+    object-fit: cover; /* 保持图片比例 */
+    margin-bottom: 0px;
 }
-img.profile-img {
-    width: 250px; /* Adjust the width as needed */
-    height: auto; /* Keeps the aspect ratio intact */
-    border-radius: 50%; /* Keeps the circle shape if desired */
-}   
 
 p {
     color: #333;

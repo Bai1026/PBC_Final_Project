@@ -25,7 +25,7 @@ INSTALLED_APPS = [
 ```
 
 ## How to open the Django shell
-- `python manage.py shell` to open the shell
+- `python manage.py shell` to open the shell.
 
 - create a superuser
 ```bash

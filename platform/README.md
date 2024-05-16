@@ -11,6 +11,19 @@
     - or directly use migrate.sh by `./migrate.sh`
         - remember to `chmod +x migrate.sh` to open the execute mode.
 
+## How to open a new app
+- create app in a specified folder
+```bash
+python manage.py startapp 'myapp_name'
+```
+- to setting.py add the app u added
+```bash
+INSTALLED_APPS = [
+    ...
+    'myapp_name',
+]
+```
+
 ## How to open the Django shell
 - `python manage.py shell` to open the shell
 

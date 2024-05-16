@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     # date = models.DateField(blank=True, null=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    gender = models.CharField(max_length=1, choices=(('M', 'Male'), ('F', 'Female')), blank=True, null=True)
+    gender = models.CharField(max_length=1, choices=(('M', 'Male'), ('F', 'Female'),('O','Others')), blank=True, null=True)
 
     instagram = models.CharField(max_length=100, blank=True, null=True)
     facebook = models.CharField(max_length=100, blank=True, null=True)

@@ -26,7 +26,7 @@ class UserRegistrationForm(forms.ModelForm):
         required=False,
         label='End Date'
     )
-    gender = forms.ChoiceField(choices=(('N', 'None'),('M', 'Male'), ('F', 'Female')),  required=False)
+    gender = forms.ChoiceField(choices=(('N', 'None'),('M', 'Male'), ('F', 'Female'),('O','Others')),  required=False)
 
     facebook = forms.CharField(required=False)
     instagram = forms.CharField(required=False)

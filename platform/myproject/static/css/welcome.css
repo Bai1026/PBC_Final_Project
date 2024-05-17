@@ -8,28 +8,94 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative; /* 添加这行 */
+    padding-bottom: 70px
 }
-.content img {
-    width: 250px; /* 调整头像大小 */
-    height: 250px; /* 调整头像大小 */
-    border-radius: 50%; /* 保持圆形 */
-    object-fit: cover; /* 保持图片比例 */
-    margin-bottom: 0px;
+
+
+img {
+    border-radius: 50%;
+    margin-top: 20px;
+}
+img.profile-img {
+    width: 250px; /* Adjust the width as needed */
+    height: auto; /* Keeps the aspect ratio intact */
+    border-radius: 50%; /* Keeps the circle shape if desired */
+} 
+h2 {
+    margin: 15px;
+}
+
+.avatar-carousel {
+    text-align: left;
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 95px; /* 根据需要调整这个值 */
+}
+
+.avatar-carousel input[type="radio"] {
+    display: none;
+}
+
+.avatar-carousel label {
+    display: inline-block;
+    text-align: center;
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin: 0 3px;
+    cursor: pointer;
+    margin-top: 280px;
+}
+
+.avatar-carousel label:hover {
+    background-color: #6c6767;
+}
+
+.avatar-carousel input[type="radio"]:checked + label img {
+    opacity: 1;
+}
+
+.avatar-carousel img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 5px;
+    margin: 10px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.content .user-information {
+    margin-top: 15px; /* 添加上边距，保持与图片的间距 */
+    margin-left: 15px;
 }
 
 p {
     color: #333;
 }
 
+.all-buttons {
+    position: relative;
+    bottom: 60px; /* 使按钮位于内容框底部 */
+    left: 5px;
+}
+
 .button {
     display: inline-block;
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background-color 0.3s;
     color: white;
     font-weight: bold;
-    margin-right: 10px; /* Adds space between the buttons */
+    margin-left: 10px;
+    margin-bottom: 15px;
 }
 .edit-profile {
     background-color: #4CAF50; /* Green */

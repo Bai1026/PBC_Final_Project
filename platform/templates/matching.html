@@ -16,8 +16,21 @@
     <div class="menu">
         <div class="current-user">
             <div class="current-user-information">
-                {% if current_user_profile.avatar %}
-                    <img src="{{ current_user_profile.avatar.url }}" alt="Profile Picture">
+                {% if current_user_profile.avatar1 or current_user_profile.avatar2 or current_user_profile.avatar3 %}
+                <div class="current-avatar">
+                    {% if current_user_profile.avatar1 %}
+                        <input type="radio" id="avatar1" name="avatar" value="{{ current_user_profile.avatar1.url }}" checked>
+                        <label for="avatar1"><img class="profile-img" src="{{ current_user_profile.avatar1.url }}" alt="Avatar 1"></label>
+                    {% endif %}
+                    {% if current_user_profile.avatar2 %}
+                        <input type="radio" id="avatar2" name="avatar" value="{{ current_user_profile.avatar2.url }}">
+                        <label for="avatar2"><img class="profile-img" src="{{ current_user_profile.avatar2.url }}" alt="Avatar 2"></label>
+                    {% endif %}
+                    {% if current_user_profile.avatar3 %}
+                        <input type="radio" id="avatar3" name="avatar" value="{{ current_user_profile.avatar3.url }}">
+                        <label for="avatar3"><img class="profile-img" src="{{ current_user_profile.avatar3.url }}" alt="Avatar 3"></label>
+                    {% endif %}
+                </div>
                 {% else %}
                     {% if current_user_profile.gender == 'M' %}
                         <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
@@ -93,8 +106,21 @@
             {% for profile in profiles %}
             {% if profile.user != current_user_profile.user %} <!-- 這裡篩選掉自己的欄位 -->
             <div class="profile">
-                {% if profile.avatar %}
-                    <img src="{{ profile.avatar.url }}" alt="Profile Picture">
+                {% if profile.avatar1 and profile.avatar2 and profile.avatar3 %}
+                    <div class="profile-avatar">    
+                        {% if profile.avatar1 %}
+                            <input type="radio" id="profile-avatar1-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar1.url }}" checked>
+                            <label for="profile-avatar1-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar1.url }}" alt="Profile Picture 1"></label>
+                        {% endif %}
+                        {% if profile.avatar2 %}
+                            <input type="radio" id="profile-avatar2-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar2.url }}">
+                            <label for="profile-avatar2-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar2.url }}" alt="Profile Picture 2"></label>
+                        {% endif %}
+                        {% if profile.avatar3 %}
+                            <input type="radio" id="profile-avatar3-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar3.url }}">
+                            <label for="profile-avatar3-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar3.url }}" alt="Profile Picture 3"></label>
+                        {% endif %}
+                    </div>
                 {% else %}
                     {% if profile.gender == 'M' %}
                         <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">

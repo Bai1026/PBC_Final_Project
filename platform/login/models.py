@@ -20,7 +20,9 @@ class UserProfile(models.Model):
     instagram = models.CharField(max_length=100, blank=True, null=True)
     facebook = models.CharField(max_length=100, blank=True, null=True)
     other_social_media = models.CharField(max_length=100, blank=True, null=True)
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    avatar1 = models.ImageField(upload_to='avatars', blank=True, null=True)
+    avatar2 = models.ImageField(upload_to='avatars', blank=True, null=True)
+    avatar3 = models.ImageField(upload_to='avatars', blank=True, null=True)
 
     def __str__(self):
         return self.user.username

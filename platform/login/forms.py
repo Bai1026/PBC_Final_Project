@@ -31,11 +31,13 @@ class UserRegistrationForm(forms.ModelForm):
     facebook = forms.CharField(required=False)
     instagram = forms.CharField(required=False)
     other_social_media = forms.CharField(required=False)
-    avatar = forms.ImageField(required=False)
+    avatar1 = forms.ImageField(required=False, widget=forms.ClearableFileInput)
+    avatar2 = forms.ImageField(required=False, widget=forms.ClearableFileInput)
+    avatar3 = forms.ImageField(required=False, widget=forms.ClearableFileInput)
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'nation', 'destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'instagram', 'facebook', 'other_social_media', 'avatar')
+        fields = ('username', 'password', 'password2', 'nation', 'destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'instagram', 'facebook', 'other_social_media', 'avatar1', 'avatar2', 'avatar3')
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -58,4 +60,4 @@ class UserRegistrationForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile  # This should be UserProfile, not User
-        fields = ['nation', 'destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'instagram', 'facebook', 'other_social_media', 'avatar']
+        fields = ['nation', 'destination', 'age', 'exchange_school', 'start_date', 'end_date', 'gender', 'instagram', 'facebook', 'other_social_media', 'avatar1', 'avatar2', 'avatar3']

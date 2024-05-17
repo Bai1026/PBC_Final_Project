@@ -99,6 +99,57 @@ form {
     margin-top: 15px;
     margin-bottom: 20px;
 }
+.profile-avatar {
+    text-align: flex-end;
+    position: relative;
+    margin-bottom: 38px;
+    padding-left: 80px;
+    width: 230px; /* 和图片宽度一致 */
+    height: 230px; /* 和图片高度一致 */
+}
+
+.profile-avatar input[type="radio"] {
+    display: none;
+}
+
+.profile-avatar label {
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin: 0 2px;
+    cursor: pointer;
+    margin-top: 255px; /* 调整位置，使其在图片下方 */
+    margin-left: 4px;
+}
+
+.profile-avatar img {
+    width: 230px; /* 调整头像大小 */
+    height: 230px; /* 调整头像大小 */
+    border-radius: 50%; /* 保持圆形 */
+    object-fit: cover; /* 保持图片比例 */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    margin-bottom: 40px;
+    top: 0;
+    left: 0;
+}
+
+.profile-avatar input[type="radio"]:checked + label img {
+    opacity: 1;
+}
+
+.profile-avatar label img:hover {
+    opacity: 1;
+}
+
+.profile-avatar input[type="radio"]:checked + label img {
+    opacity: 1;
+}
+
 
 .profile p {
     margin: 5px 0;
@@ -187,7 +238,7 @@ form {
     margin-top: 15px;
     margin-bottom: 20px; /* 调整与其他菜单项的间距 */
     margin-left: 20px; /* 左侧距离调整 */
-    margin-right: 20px; /* 右侧距离调整 */
+    margin-right: 5px; /* 右侧距离调整 */
 }
 
 .menu .current-user img {
@@ -196,11 +247,58 @@ form {
     border-radius: 50%; /* 保持圆形 */
     object-fit: cover; /* 保持图片比例 */
     margin-top: 5px;
-    margin-left: 8px;
+    margin-left: 2px;
     margin-bottom: 0px;
+}
+.current-avatar {
+    text-align: flex-end;
+    position: relative;
+    margin-bottom: 0px;
+    padding-left: 25px;
+    margin-right: 30px;
+}
+
+.current-avatar input[type="radio"] {
+    display: none;
+}
+
+.current-avatar label {
+    display: inline-block;
+    align-items: center;
+    width: 7px;
+    height: 7px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin: 0 2px;
+    cursor: pointer;
+    margin-top: 108px;
+    margin-left: 2px;
+}
+
+.current-avatar img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    top: 5px;
+    left: 2px;
+}
+
+.current-avatar input[type="radio"]:checked + label img {
+    opacity: 1;
+}
+.current-avatar label img:hover {
+    opacity: 1;
+}
+.current-avatar input[type="radio"]:checked + label img {
+    opacity: 1;
 }
 
 .menu .current-user p {
+    text-align: center;
     color: #333;
     font-size: 16px;
     font-weight: bold;
@@ -211,9 +309,12 @@ form {
     flex-direction: column;
 }
 .menu .current-user .current-user-actions {
+    position: absolute; /* 使用相对定位 */
+    left: 135px; /* 将按钮靠右 */
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
+    padding-right: 0px;
     display: flex;
     flex-direction: column; /* 上下排列 */
 }
@@ -230,10 +331,12 @@ form {
     margin-top: 5px;
     margin-bottom: 7px;
     width: 123px; /* 调整按钮宽度 */
-    height: 38px; /* 调整按钮高度 */
+    height: 42px; /* 调整按钮高度 */
     text-align: center; /* 文本居中 */
-    line-height: 38px; /* 与按钮高度一致，实现垂直居中 */
+    line-height: 42px; /* 与按钮高度一致，实现垂直居中 */
     font-weight: bold;
+    position: static;
+    margin-left: auto; /* 将按钮靠右 */
 }
 .menu .current-user .update-profile-button:hover {
     background-color: #2694d4;
@@ -249,10 +352,12 @@ form {
     margin-top: 7px;
     margin-bottom: 5px;
     width: 123px; /* 调整按钮宽度 */
-    height: 38px; /* 调整按钮高度 */
+    height: 42px; /* 调整按钮高度 */
     text-align: center; /* 文本居中 */
-    line-height: 38px; /* 与按钮高度一致，实现垂直居中 */
+    line-height: 42px; /* 与按钮高度一致，实现垂直居中 */
     font-weight: bold;
+    position: static;
+    margin-left: auto; /* 将按钮靠右 */
 }
 .menu .current-user .log-out-button:hover {
     background-color: #ef7b33;

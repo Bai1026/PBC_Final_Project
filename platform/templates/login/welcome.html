@@ -13,8 +13,21 @@
 <body>
     <div class="content">
         <h2>Welcome, {{ username }}! Please enjoy your journey!</h2>
-        {% if profile.avatar %}
-        <img class="profile-img" src="{{ profile.avatar.url }}" alt="Profile Picture">
+        {% if profile.avatar1 or profile.avatar2 or profile.avatar3 %}
+            <div class="avatar-carousel">
+                {% if profile.avatar1 %}
+                    <input type="radio" id="avatar1" name="avatar" value="{{ profile.avatar1.url }}" checked>
+                    <label for="avatar1"><img class="profile-img" src="{{ profile.avatar1.url }}" alt="Avatar 1"></label>
+                {% endif %}
+                {% if profile.avatar2 %}
+                    <input type="radio" id="avatar2" name="avatar" value="{{ profile.avatar2.url }}">
+                    <label for="avatar2"><img class="profile-img" src="{{ profile.avatar2.url }}" alt="Avatar 2"></label>
+                {% endif %}
+                {% if profile.avatar3 %}
+                    <input type="radio" id="avatar3" name="avatar" value="{{ profile.avatar3.url }}">
+                    <label for="avatar3"><img class="profile-img" src="{{ profile.avatar3.url }}" alt="Avatar 3"></label>
+                {% endif %}
+            </div>
         {% else %}
             {% if profile.gender == 'M' %}
                 <img class="profile-img" src="{% static 'images/male.png' %}" alt="Default Male Avatar">
@@ -24,14 +37,16 @@
                 <img class="profile-img" src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
             {% endif %}
         {% endif %}
-        <p>Nation: {{ profile.nation }}</p>
-        <p>Destination: {{ profile.destination }}</p>
-        <p>Age: {{ profile.age }}</p>
-        <p>Exchange School: {{ profile.exchange_school }}</p>
-        <p>Start Date: {{ profile.start_date }}</p>
-        <p>End Date: {{ profile.end_date }}</p>
-        <p>Gender: {{ profile.get_gender_display }}</p>
-        <div>
+        <div class="user-information"></div>
+            <p>Nation: {{ profile.nation }}</p>
+            <p>Destination: {{ profile.destination }}</p>
+            <p>Age: {{ profile.age }}</p>
+            <p>Exchange School: {{ profile.exchange_school }}</p>
+            <p>Start Date: {{ profile.start_date }}</p>
+            <p>End Date: {{ profile.end_date }}</p>
+            <p>Gender: {{ profile.get_gender_display }}</p>
+        </div>
+        <div class="all-buttons">
             <a href="{% url 'user_matching' username=request.user.username %}" class="button start-journey">Start Your Journey</a>
             <a href="{% url 'update_profile' username=request.user.username %}" class="button edit-profile">Update Profile</a>
             <a href="{% url 'login' %}" class="button log-out">Log Out</a>

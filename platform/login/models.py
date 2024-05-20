@@ -26,6 +26,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    # MAX part
+    @property
+    def friends(self):
+        friends1 = self.user.friends1.all()
+        friends2 = self.user.friends2.all()
+        return list(friends1) + list(friends2)
 
 
 @receiver(post_save, sender=User)
@@ -44,6 +51,7 @@ class HiddenProfile(models.Model):
     class Meta:
         unique_together = ('user', 'hidden_user')  # Ensures uniqueness
 
+
 class DeletedProfile(models.Model):
     """
     刪除用戶的關係模型
@@ -53,3 +61,23 @@ class DeletedProfile(models.Model):
 
     class Meta:
         unique_together = ('user', 'deleted_user')  # Ensures uniqueness
+
+# MAX part
+class MatchInvitation(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_invitations', on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name='received_invitations', on_delete=models.CASCADE)
+    # status = models.CharField(max_length=10, choices=[('sent', 'Sent'), ('accepted', 'Accepted')], default='sent')
+    mutual = models.BooleanField(default=False)
+
+# MAX part
+class Friend(models.Model):
+    user1 = models.ForeignKey(User, related_name='friends1', on_delete=models.CASCADE)
+    user2 = models.ForeignKey(User, related_name='friends2', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user1', 'user2')  # 确保用户之间的唯一友谊
+
+    def __str__(self):
+        # return f"{self.user1.username} and {self.user2.username} are friends"
+        return f"{self.user1.username} & {self.user2.username}"

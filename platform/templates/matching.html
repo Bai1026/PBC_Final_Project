@@ -51,13 +51,19 @@
             <h3>My Friends</h3>
             <ul>
                 {% for friend in friends %}
-                    <li>{{ friend }}</li>
+                <li>
+                    {% if friend.user1 == current_user_profile.user %}
+                        {{ friend.user2.username }}
+                    {% else %}
+                        {{ friend.user1.username }}
+                    {% endif %}
+                </li>
                 {% empty %}
                     <li>No friends yet.</li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="matching-request">
+        <!-- <div class="matching-request">
             <h3>Matching Requests</h3>
             <ul>
                 {% for request in matching_requests_received %}
@@ -66,7 +72,7 @@
                     <li>No matching requests yet.</li>
                 {% endfor %}
             </ul>
-        </div>
+        </div> -->
     </div>
     <div class="content">
         <div class="form-container">
@@ -139,7 +145,7 @@
                 <div class="profile-actions">
                     <!-- 縮小的 Match, Hide 和 Delete 按鈕 -->
                     <!-- <a href="{% url 'login' %}" class="button matching">Match</a>   -->
-                    <a href="{% url 'user_matching' profile.user.username %}" class="button matching">Match</a> <!-- 使用 'user_matching' 名稱 -->
+                    <a href="{% url 'send_match_request' profile.user.username %}" class="button matching" onclick="return confirm('Are you sure you want to send a match request to this user?');">Match</a>
                     <a href="{% url 'hide_profile' profile.user.username %}" class="button hide" onclick="return confirm('Are you sure you want to hide this profile?');">Hide</a>
                     <a href="{% url 'delete_profile' profile.user.username %}" class="button delete" onclick="return confirm('Are you sure you want to delete this profile?');">Delete</a>
                 </div>

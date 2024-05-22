@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'error_handlers',
     'matching',
     'welcome',
+    'friends'
 ]
 
 MIDDLEWARE = [

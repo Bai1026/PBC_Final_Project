@@ -3,9 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 /* 標題 */
 .title-box {
-    background-color: #6f7177;
+    background-color: #657d8d;
     padding: 15px;
 }
 h1 {
@@ -89,7 +90,6 @@ h4 a:active {
     color: #282726; /* 链接被点击时的颜色 */
     text-decoration: underline;
 }
-
 /* content */
 .content {
     width: 100vw;
@@ -100,13 +100,6 @@ h4 a:active {
     flex: 1 1 auto;
     display: flex; /* 将 content 区域设置为 flex 布局 */
     flex-direction: column; /* 垂直方向排列子元素 */
-}
-
-form {
-    display: inline-block; 
-}
-.form-container {
-    white-space: nowrap; /* 防止內容換行，反正就是讓show all跟其他按鈕同一行 */
 }
 
 .profile-container {
@@ -127,7 +120,7 @@ form {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 320px;  /* Adjusted width */
-    height: 530px; /* Adjusted height */
+    height: 580px; /* Adjusted height */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -227,45 +220,8 @@ form {
     margin-right: 10px; // Adds space between the buttons //
     margin-top: 15px;
     */
-    background-color: #2c3e50; /* 預設按鈕顏色 */     /* Max改 */
-} 
-
-
-/* Max */
-.button:hover {
-    opacity: 0.8;
+    background-color: #2ecc71; /* Max修改 */
 }
-.matching {
-    background-color: #4CAF50; /* Green */
-}
-.hide {
-    background-color: #7f8b8f; /* 灰色按鈕 */
-}
-.delete {
-    background-color: #e53935; /* 紅色刪除按鈕 */
-}
-.edit-profile {
-    background-color: #4cb1e8; /* Blue */
-}
-.log-out {
-    background-color: #ef7b33; /* 橙色按鈕 */
-}
-
-
-/* .matching:hover, .report:hover, .log-out:hover, .edit-profile:hover, .delete:hover {
-    opacity: 0.8;
-} */
-
-
-/* Max 移到下面的*/
-/* Responsive adjustments for smaller screens */
-@media (max-width: 600px) {
-    .profile-container {
-        flex-direction: column; /* 小屏幕下垂直佈局 */
-        align-items: center;
-    }
-}
-
 
 /* 将 .current-user 的样式添加到 .menu 中 */
 .menu .current-user {

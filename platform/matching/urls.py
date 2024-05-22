@@ -8,7 +8,6 @@ from login.views import UserProfileUpdate
 from . import views
 
 urlpatterns = [
-    
     path('filter/', filter_function, name='filter_function'),
     path('show-all-profiles/', show_all_profiles, name='show_all_profiles'),
     path('<str:username>/', user_matching, name='user_matching'),

@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="friend-list">
-            <h3>My Friends</h3>
+            <h3><a href="{% url 'friends:friends_list' %}">My Friends</a></h3>
             <ul>
                 {% for friend in friends %}
                 <li>
@@ -62,6 +62,7 @@
                     <li>No friends yet.</li>
                 {% endfor %}
             </ul>
+            <h4><a href="{% url 'user_matching' request.user.username %}">Matching Platform</a></h4>
         </div>
         <!-- <div class="matching-request">
             <h3>Matching Requests</h3>

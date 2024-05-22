@@ -32,5 +32,6 @@ urlpatterns = [
     path('error/', include('error_handlers.urls')),
     path('matching/', include('matching.urls')),
     path('welcome/', include('welcome.urls')),
+    path('friends/', include('friends.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

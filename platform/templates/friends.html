@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Friends</title>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/friends.css' %}">
+</head>
+
+<body1>
+    <div class="title-box">
+        <h1>My Friends</h1>
+    </div>
+</body1>
+<body2>
+    <div class="menu">
+        <div class="current-user">
+            <div class="current-user-information">
+                {% if current_user_profile.avatar1 or current_user_profile.avatar2 or current_user_profile.avatar3 %}
+                <div class="current-avatar">
+                    {% if current_user_profile.avatar1 %}
+                        <input type="radio" id="avatar1" name="avatar" value="{{ current_user_profile.avatar1.url }}" checked>
+                        <label for="avatar1"><img class="profile-img" src="{{ current_user_profile.avatar1.url }}" alt="Avatar 1"></label>
+                    {% endif %}
+                    {% if current_user_profile.avatar2 %}
+                        <input type="radio" id="avatar2" name="avatar" value="{{ current_user_profile.avatar2.url }}">
+                        <label for="avatar2"><img class="profile-img" src="{{ current_user_profile.avatar2.url }}" alt="Avatar 2"></label>
+                    {% endif %}
+                    {% if current_user_profile.avatar3 %}
+                        <input type="radio" id="avatar3" name="avatar" value="{{ current_user_profile.avatar3.url }}">
+                        <label for="avatar3"><img class="profile-img" src="{{ current_user_profile.avatar3.url }}" alt="Avatar 3"></label>
+                    {% endif %}
+                </div>
+                {% else %}
+                    {% if current_user_profile.gender == 'M' %}
+                        <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                    {% elif current_user_profile.gender == 'F' %}
+                        <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                    {% else %}
+                        <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                    {% endif %}
+                {% endif %}
+                <p>{{ current_user_profile.user.username }}</p>
+            </div>
+            <div class="current-user-actions">
+                <a href="{% url 'update_profile' username=current_user_profile.user.username %}" class="update-profile-button">Update Profile</a>
+                <a href="{% url 'login' %}" class="log-out-button">Log Out</a>
+            </div>
+            
+        </div>
+        <div class="friend-list">
+            <h3><a href="{% url 'friends:friends_list' %}">My Friends</a></h3>
+            <ul>
+                {% for friend in friends %}
+                <li>
+                    {% if friend.user1 == current_user_profile.user %}
+                        {{ friend.user2.username }}
+                    {% else %}
+                        {{ friend.user1.username }}
+                    {% endif %}
+                </li>
+                {% empty %}
+                    <li>No friends yet.</li>
+                {% endfor %}
+            </ul>
+            <h4><a href="{% url 'user_matching' request.user.username %}">Matching Platform</a></h4>
+        </div>
+    </div>
+    <div class="content">
+        <div class="profile-container">
+            {% for friend in friends %}
+                {% if friend.user1 == request.user %}
+                    {% with friend_user=friend.user2 %}
+                        <div class="profile">
+                            {% with profile=friend_user.userprofile %}
+                                {% if profile.avatar1 or profile.avatar2 or profile.avatar3 %}
+                                    <div class="profile-avatar">
+                                        {% if profile.avatar1 %}
+                                            <input type="radio" id="profile-avatar1-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar1.url }}" checked>
+                                            <label for="profile-avatar1-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar1.url }}" alt="Profile Picture 1"></label>
+                                        {% endif %}
+                                        {% if profile.avatar2 %}
+                                            <input type="radio" id="profile-avatar2-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar2.url }}">
+                                            <label for="profile-avatar2-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar2.url }}" alt="Profile Picture 2"></label>
+                                        {% endif %}
+                                        {% if profile.avatar3 %}
+                                            <input type="radio" id="profile-avatar3-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar3.url }}">
+                                            <label for="profile-avatar3-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar3.url }}" alt="Profile Picture 3"></label>
+                                        {% endif %}
+                                    </div>
+                                {% else %}
+                                    {% if profile.gender == 'M' %}
+                                        <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                                    {% elif profile.gender == 'F' %}
+                                        <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                                    {% else %}
+                                        <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                                    {% endif %}
+                                {% endif %}
+                                <p>Name: {{ profile.user.username }}</p>
+                                <p>Destination: {{ profile.destination|default_if_none:"Not specified" }}</p>
+                                <p>Age: {{ profile.age|default_if_none:"Unknown" }}</p>
+                                <p>Exchange School: {{ profile.exchange_school|default_if_none:"Not specified" }}</p>
+                                <p>Gender: {{ profile.get_gender_display|default_if_none:"Not specified" }}</p>
+                                <p>Instagram: {{ profile.instagram|default_if_none:"Not specified" }}</p>
+                                <p>Facebook: {{ profile.facebook|default_if_none:"Not specified" }}</p>
+                                <p>Other Social Media: {{ profile.other_social_media|default_if_none:"Not specified" }}</p>
+                            {% endwith %}
+                        </div>
+                    {% endwith %}
+                {% else %}
+                    {% with friend_user=friend.user1 %}
+                        <div class="profile">
+                            {% with profile=friend_user.userprofile %}
+                                {% if profile.avatar1 or profile.avatar2 or profile.avatar3 %}
+                                    <div class="profile-avatar">
+                                        {% if profile.avatar1 %}
+                                            <input type="radio" id="profile-avatar1-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar1.url }}" checked>
+                                            <label for="profile-avatar1-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar1.url }}" alt="Profile Picture 1"></label>
+                                        {% endif %}
+                                        {% if profile.avatar2 %}
+                                            <input type="radio" id="profile-avatar2-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar2.url }}">
+                                            <label for="profile-avatar2-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar2.url }}" alt="Profile Picture 2"></label>
+                                        {% endif %}
+                                        {% if profile.avatar3 %}
+                                            <input type="radio" id="profile-avatar3-{{ forloop.counter }}" name="profile-avatar-{{ forloop.counter }}" value="{{ profile.avatar3.url }}">
+                                            <label for="profile-avatar3-{{ forloop.counter }}"><img class="profile-img" src="{{ profile.avatar3.url }}" alt="Profile Picture 3"></label>
+                                        {% endif %}
+                                    </div>
+                                {% else %}
+                                    {% if profile.gender == 'M' %}
+                                        <img src="{% static 'images/male.png' %}" alt="Default Male Avatar">
+                                    {% elif profile.gender == 'F' %}
+                                        <img src="{% static 'images/female.png' %}" alt="Default Female Avatar">
+                                    {% else %}
+                                        <img src="{% static 'images/neutral.jpg' %}" alt="Default Neutral Avatar">
+                                    {% endif %}
+                                {% endif %}
+                                <p>Name: {{ profile.user.username }}</p>
+                                <p>Destination: {{ profile.destination|default_if_none:"Not specified" }}</p>
+                                <p>Age: {{ profile.age|default_if_none:"Unknown" }}</p>
+                                <p>Exchange School: {{ profile.exchange_school|default_if_none:"Not specified" }}</p>
+                                <p>Gender: {{ profile.get_gender_display|default_if_none:"Not specified" }}</p>
+                                <p>Instagram: {{ profile.instagram|default_if_none:"Not specified" }}</p>
+                                <p>Facebook: {{ profile.facebook|default_if_none:"Not specified" }}</p>
+                                <p>Other Social Media: {{ profile.other_social_media|default_if_none:"Not specified" }}</p>
+                            {% endwith %}
+                        </div>
+                    {% endwith %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body2>
+</html>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-text">© 2024 Spring PBC Final Project</div>
+        <div class="footer-icon">
+            <a href="https://github.com/Bai1026/PBC_Final_Project/tree/main" target="_blank">
+                <img src="{% static 'images/github.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+            <a href="mailto:b09602017@ntu.edu.tw" target="_blank">
+                <img src="{% static 'images/email.png' %}" alt="Our GitHub" style="width:20px; height:20px;">
+            </a>
+        </div>
+    </div>
+</footer>

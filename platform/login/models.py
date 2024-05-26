@@ -35,6 +35,15 @@ class UserProfile(models.Model):
         return list(friends1) + list(friends2)
 
 
+class RecommendationScore(models.Model):
+    user_from = models.ForeignKey(User, related_name='recommendations_given', on_delete=models.CASCADE)
+    user_to = models.ForeignKey(User, related_name='recommendations_received', on_delete=models.CASCADE)
+    score = models.FloatField()
+
+    class Meta:
+        unique_together = ('user_from', 'user_to')
+
+
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:

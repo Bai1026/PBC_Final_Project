@@ -17,7 +17,7 @@
   ```bash
   pip install -r requirements.txt
   ```
-- Further steps please refer to [platform folder](https://github.com/Bai1026/PBC_Final_Project/platform)
+- Further steps please refer to [platform folder](https://github.com/Bai1026/PBC_Final_Project/tree/main/platform)
 
   ## Team member:
   [Vincent Pai](https://github.com/Bai1026), [Max Liu](https://github.com/max09401), [Zoe Cheng](https://github.com/zoe891026), [Leona Hsu](https://github.com/Leonahsu)

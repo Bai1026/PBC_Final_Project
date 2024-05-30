@@ -169,8 +169,6 @@ def user_matching(request, username):
             output_field=FloatField()
         )
     ).order_by('total_hide_count', '-annotated_recommendation_score')
-    # ).order_by('total_hide_count')
-
 
     # for profile in profiles:
     #     print(profile.user.username, profile.annotated_recommendation_score)

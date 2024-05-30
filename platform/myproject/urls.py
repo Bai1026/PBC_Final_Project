@@ -19,7 +19,6 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-# 導入自定義視圖，Max
 # from login.views import delete_profile
 
 urlpatterns = [

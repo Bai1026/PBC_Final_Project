@@ -10,17 +10,19 @@ from login.models import UserProfile, HiddenProfile
 from login.views import UserProfileUpdate
 
 
-# 新增筛选功能的视图函数
 def filter_function(request):
+    """
+    Add filtering function view
+    """
     if request.method == 'POST':
         
-        # 获取筛选参数
+        # Get filter parameters
         destination = request.POST.get('destination')
         age = request.POST.get('age')
         exchange_school = request.POST.get('exchange_school')
         gender = request.POST.get('gender')
 
-        # 构建筛选条件
+        # Build filter conditions
         filter_params = {}
         if destination:
             filter_params['destination'] = destination
@@ -32,23 +34,23 @@ def filter_function(request):
             filter_params['gender'] = gender
         
         if 'reset' in request.POST:
-            # 清空筛选参数
+            # Clear filter parameters
             filter_params = {}
 
-        # 获取当前用户的profile
+        # Get the current user's profile
         current_user_profile = UserProfile.objects.get(user=request.user)
         
-        # 根据筛选参数查询用户
+        # Query users based on filter parameters
         filtered_profiles = UserProfile.objects.exclude(user=request.user).filter(**filter_params)
 
-        # 渲染匹配页面，并传递筛选后的数据和当前用户的profile
+        # Render the matching page and pass the filtered data and current user's profile
         return render(request, 'matching.html', {
             'profiles': filtered_profiles,
             'current_user_profile': current_user_profile
         })
 
     else:
-        # 如果是 GET 请求，直接返回匹配页面
+        # If it's a GET request, directly return the matching page
         return render(request, 'matching.html')
 
 

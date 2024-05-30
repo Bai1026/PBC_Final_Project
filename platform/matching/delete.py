@@ -10,13 +10,13 @@ from login.models import DeletedProfile
 @login_required
 def delete_profile(request, username):
     """
-    永久刪除指定用戶的 profile。
+    Permanently delete the profile of the specified user.
     """
-    # 根據用戶名查找要刪除的目標用戶
+    # Find the target user to be deleted by username
     user_to_delete = get_object_or_404(User, username=username)
     user_profile_to_delete = UserProfile.objects.get(user=user_to_delete)
 
-    # 檢查是否已經存在刪除記錄
+    # Check if a deletion record already exists
     deleted_profile, created = DeletedProfile.objects.get_or_create(user=request.user, deleted_user=user_profile_to_delete)
 
     if not created:
@@ -24,5 +24,5 @@ def delete_profile(request, username):
     else:
         messages.success(request, f"User {username} has been permanently removed from your interface.")
 
-    # 返回匹配頁面
+    # Return to the matching page
     return redirect('user_matching', username=request.user.username)

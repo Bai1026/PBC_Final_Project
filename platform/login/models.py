@@ -62,9 +62,6 @@ class HiddenProfile(models.Model):
 
 
 class DeletedProfile(models.Model):
-    """
-    刪除用戶的關係模型
-    """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='deleted_profiles')
     deleted_user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='deleted_profile')
 
@@ -85,7 +82,7 @@ class Friend(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('user1', 'user2')  # 确保用户之间的唯一友谊
+        unique_together = ('user1', 'user2')  # Ensures the uniqueness of the friendship relationship
 
     def __str__(self):
         # return f"{self.user1.username} and {self.user2.username} are friends"

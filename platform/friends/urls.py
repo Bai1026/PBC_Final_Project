@@ -12,5 +12,4 @@ urlpatterns = [
     path('show-all-profiles/', show_all_profiles, name='show_all_profiles'),
     path('profile_update/<str:username>/', UserProfileUpdate.as_view(), name='update_profile'),
     path('', friends_list, name='friends_list'),
-    # 其他 friends 應用程序的 URL 配置...
 ]

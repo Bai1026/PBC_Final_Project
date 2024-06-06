@@ -27,7 +27,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
-    # MAX part
     @property
     def friends(self):
         friends1 = self.user.friends1.all()
@@ -42,14 +41,6 @@ class RecommendationScore(models.Model):
 
     class Meta:
         unique_together = ('user_from', 'user_to')
-
-
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-    else:
-        instance.userprofile.save()
 
 
 class HiddenProfile(models.Model):
@@ -68,14 +59,14 @@ class DeletedProfile(models.Model):
     class Meta:
         unique_together = ('user', 'deleted_user')  # Ensures uniqueness
 
-# MAX part
+
 class MatchInvitation(models.Model):
     sender = models.ForeignKey(User, related_name='sent_invitations', on_delete=models.CASCADE)
     receiver = models.ForeignKey(User, related_name='received_invitations', on_delete=models.CASCADE)
     # status = models.CharField(max_length=10, choices=[('sent', 'Sent'), ('accepted', 'Accepted')], default='sent')
     mutual = models.BooleanField(default=False)
 
-# MAX part
+
 class Friend(models.Model):
     user1 = models.ForeignKey(User, related_name='friends1', on_delete=models.CASCADE)
     user2 = models.ForeignKey(User, related_name='friends2', on_delete=models.CASCADE)
@@ -87,3 +78,11 @@ class Friend(models.Model):
     def __str__(self):
         # return f"{self.user1.username} and {self.user2.username} are friends"
         return f"{self.user1.username} & {self.user2.username}"
+    
+    
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+    else:
+        instance.userprofile.save()

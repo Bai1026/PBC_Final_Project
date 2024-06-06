@@ -14,7 +14,7 @@
 ## How to open a new app
 - create app in a specified folder
 ```bash
-python manage.py startapp 'myapp_name'
+python manage.py stavrtapp 'myapp_name'
 ```
 - to setting.py add the app u added
 ```bash

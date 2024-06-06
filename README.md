@@ -1,5 +1,7 @@
 # PBC_Final_Project
 > Final Project of Programming for Business Computing, 2024
+- Team 9
+- Member: [Vincent Pai](https://github.com/Bai1026), [Max Liu](https://github.com/max09401), [Zoe Cheng](https://github.com/zoe891026), [Leona Hsu](https://github.com/Leonahsu)
 
 ## Our purpose:
 - To build a exchange student matching platform.
@@ -30,6 +32,7 @@
     ├── myproject: main folder contains settings and urls
     ├── templates: folder for all the HTML files
     ├── welcome: folder for welcome page
+    ├
     ├── db.sqlite3: store the back-end data with sqlite
     ├── manage.py: the code to start the website
     ├── migrate.sh: shell script for migrate
@@ -47,6 +50,3 @@
     ├── views.py
     └── ...
 ```
-
-## Team member:
-  [Vincent Pai](https://github.com/Bai1026), [Max Liu](https://github.com/max09401), [Zoe Cheng](https://github.com/zoe891026), [Leona Hsu](https://github.com/Leonahsu)

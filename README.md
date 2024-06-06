@@ -50,3 +50,7 @@
     ├── views.py
     └── ...
 ```
+
+## Notice
+- Different Brower version could lead to different results.
+- Remember to use the updated version of the browers.

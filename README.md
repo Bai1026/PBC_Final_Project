@@ -6,6 +6,9 @@
 ## Our purpose:
 - To build a exchange student matching platform.
 - Built with Django and decorated with HTML and CSS.
+
+## Demo Video
+[![Watch the video](https://img.youtube.com/vi/hyX775lLM6A/0.jpg)](https://www.youtube.com/watch?v=hyX775lLM6A)
   
 ## How to use:
 - create a vitual environment

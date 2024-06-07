@@ -8,7 +8,12 @@
 - Built with Django and decorated with HTML and CSS.
 
 ## Demo Video
-[![Watch the video](https://img.youtube.com/vi/hyX775lLM6A/0.jpg)](https://www.youtube.com/watch?v=hyX775lLM6A)
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=hyX775lLM6A">
+    <img src="https://img.youtube.com/vi/hyX775lLM6A/0.jpg" alt="Watch the video">
+  </a>
+</p>
   
 ## How to use:
 - create a vitual environment
